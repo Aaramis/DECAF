@@ -2,18 +2,23 @@
 line-length = 88
 target-version = ["py39"]
 include = '\.pyi?$'
-exclude = '''
+exclude = '''(?x)  # Use verbose regex mode for readability
 /(
+    # Standard excludes
     \.git
   | \.hg
   | \.mypy_cache
   | \.tox
-  | \decaf-env
-  | \decaf\models
   | _build
+  | decaf-env
+  | decaf/models/*
   | buck-out
   | build
   | dist
+
+    # Project-specific excludes
+  | decaf-env    # Removed leading \
+  | decaf/models # Changed \ to /
 )/
 '''
 
