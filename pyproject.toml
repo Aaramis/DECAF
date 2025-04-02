@@ -26,6 +26,7 @@ exclude = '''(?x)  # Use verbose regex mode for readability
 profile = "black"
 line_length = 88
 multi_line_output = 3
+skip = ["decaf-env", "decaf/models"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
