@@ -24,3 +24,20 @@ Ce projet est actuellement en phase de développement initial.
 
 ## Licence
 [Spécifiez votre licence]
+
+
+
+# Création de l'environnement virtuel
+python -m venv decaf-env
+
+# Activation de l'environnement (Windows)
+decaf-env\Scripts\activate
+
+# Activation de l'environnement (Linux/Mac)
+source decaf-env/bin/activate
+
+pip install -r requirements.txt
+
+
+
+black --check .

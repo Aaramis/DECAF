@@ -1,0 +1,33 @@
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+include = '\.pyi?$'
+exclude = '''(?x)  # Use verbose regex mode for readability
+/(
+    # Standard excludes
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | _build
+  | decaf-env
+  | decaf/models/*
+  | buck-out
+  | build
+  | dist
+
+    # Project-specific excludes
+  | decaf-env    # Removed leading \
+  | decaf/models # Changed \ to /
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+skip = ["decaf-env", "decaf/models"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"

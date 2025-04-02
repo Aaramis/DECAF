@@ -1,0 +1,21 @@
+# Dépendances principales
+# torch>=2.4.1
+# pytorch_lightning>=2.5.0.post0
+# transformers>=4.49.0
+# polars>=1.26.0
+
+
+
+# Outils de développement
+# pytest>=7.0.0
+# pytest-cov>=3.0.0
+black
+flake8
+isort
+mypy
+
+# Documentation
+
+
+# Utilitaires
+pandas
