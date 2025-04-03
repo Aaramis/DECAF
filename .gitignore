@@ -84,3 +84,5 @@ models/saved/
 results/
 logs/
 models/
+*env/
+site/

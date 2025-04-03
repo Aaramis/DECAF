@@ -1,0 +1,56 @@
+site_name: DECAF Documentation
+site_description: Documentation for the DNA Environmental Contaminant Analysis Framework
+site_author: Auguste Gardette
+repo_url: https://github.com/Aaramis/DECAF
+repo_name: Aaramis/DECAF
+
+theme:
+  name: mkdocs
+  palette:
+    primary: indigo
+    accent: green
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.critic
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Accueil: index.md
+  # - Installation: installation.md
+  # - Guide de démarrage: getting-started.md
+  # - Guides:
+  #   - Traitement des séquences: guides/sequence-processing.md
+  #   - Entraînement des modèles: guides/model-training.md
+  # - Référence API: 
+  #   - Vue d'ensemble: api/index.md
+  #   - Module principal: api/core.md
+  #   - Modèles: api/models.md
+  #   - Utilitaires: api/utils.md
+  - Contribuer:
+    # - Guide de contribution: contributing/index.md
+    - Standards de codage: contributing/coding-standards.md
+    - Conventions de nommage: contributing/naming-conventions.md
+    - Templates de documentation: contributing/documentation-templates.md
+  # - Développement:
+  #   - Planning: development/roadmap.md
+  #   - Journal des modifications: development/changelog.md
+
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Aaramis
