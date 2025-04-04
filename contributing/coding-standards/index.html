@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Auguste Gardette">
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Standards de codage - DECAF Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">DECAF Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Accueil</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Contribuer</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Standards de codage</a>
+</li>
+                                    
+<li>
+    <a href="../naming-conventions/" class="dropdown-item">Conventions de nommage</a>
+</li>
+                                    
+<li>
+    <a href="../documentation-templates/" class="dropdown-item">Templates de documentation</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../.." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../naming-conventions/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/Aaramis/DECAF/edit/master/docs/contributing/coding-standards.md" class="nav-link">Edit on Aaramis/DECAF
+                                    </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#standards-de-codage-pour-decaf" class="nav-link">Standards de codage pour DECAF</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#style-de-code-general" class="nav-link">Style de code général</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#structure-des-fichiers" class="nav-link">Structure des fichiers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#longueur-des-lignes-et-indentation" class="nav-link">Longueur des lignes et indentation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#nommage" class="nav-link">Nommage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#docstrings" class="nav-link">Docstrings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#commentaires" class="nav-link">Commentaires</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#gestion-des-erreurs" class="nav-link">Gestion des erreurs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tests-unitaires" class="nav-link">Tests unitaires</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#validation-du-code" class="nav-link">Validation du code</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="standards-de-codage-pour-decaf">Standards de codage pour DECAF<a class="headerlink" href="#standards-de-codage-pour-decaf" title="Permanent link">&para;</a></h1>
+<p>Ce document définit les normes de codage à suivre pour le projet DECAF.</p>
+<h2 id="style-de-code-general">Style de code général<a class="headerlink" href="#style-de-code-general" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Suivre la norme <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> pour le style de code Python.</li>
+<li>Utiliser <a href="https://black.readthedocs.io/">Black</a> avec les paramètres par défaut pour le formatage automatique du code.</li>
+<li>Utiliser <a href="https://pycqa.github.io/isort/">isort</a> pour organiser les imports.</li>
+<li>Utiliser <a href="https://flake8.pycqa.org/">flake8</a> pour la vérification statique du code.</li>
+</ul>
+<h2 id="structure-des-fichiers">Structure des fichiers<a class="headerlink" href="#structure-des-fichiers" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Chaque module doit avoir un fichier <code>__init__.py</code>.</li>
+<li>Les fichiers de test doivent être nommés <code>test_*.py</code> et placés dans le répertoire <code>tests/</code>.</li>
+<li>Les scripts exécutables doivent être placés dans le répertoire <code>decaf/</code>.</li>
+</ul>
+<h2 id="longueur-des-lignes-et-indentation">Longueur des lignes et indentation<a class="headerlink" href="#longueur-des-lignes-et-indentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Limite de 88 caractères par ligne (norme Black).</li>
+<li>Utiliser 4 espaces pour l'indentation (pas de tabulations).</li>
+<li>Les commentaires de ligne doivent être limités à 72 caractères.</li>
+</ul>
+<h2 id="nommage">Nommage<a class="headerlink" href="#nommage" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Classes: Utiliser le format CamelCase (<code>class ModelTrainer:</code>).</li>
+<li>Fonctions et variables: Utiliser le format snake_case (<code>def process_sequence():</code>, <code>sequence_data = ...</code>).</li>
+<li>Constantes: Utiliser des majuscules avec underscore (<code>MAX_SEQUENCE_LENGTH = 1000</code>).</li>
+<li>Modules: Utiliser des noms courts, tout en minuscules (<code>utils.py</code>, <code>preprocessing.py</code>).</li>
+<li>Éviter les noms de variables d'une seule lettre, sauf pour les compteurs ou les itérateurs.</li>
+</ul>
+<h2 id="docstrings">Docstrings<a class="headerlink" href="#docstrings" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Toutes les fonctions, classes et méthodes publiques doivent avoir des docstrings.</li>
+<li>Utiliser le format <a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy/SciPy</a> pour les docstrings.</li>
+<li>Exemple de docstring pour une fonction:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">align_sequences</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;global&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Aligne deux séquences biologiques.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    seq1 : str</span>
+<span class="sd">        Première séquence à aligner</span>
+<span class="sd">    seq2 : str</span>
+<span class="sd">        Deuxième séquence à aligner</span>
+<span class="sd">    method : {&#39;global&#39;, &#39;local&#39;, &#39;semi-global&#39;}, default=&#39;global&#39;</span>
+<span class="sd">        Méthode d&#39;alignement à utiliser</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        Un tuple contenant les séquences alignées (str, str) et le score (float)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; align_sequences(&quot;ACGT&quot;, &quot;ACT&quot;)</span>
+<span class="sd">    (&#39;ACGT&#39;, &#39;AC-T&#39;, 2.5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<h2 id="commentaires">Commentaires<a class="headerlink" href="#commentaires" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Les commentaires doivent expliquer le "pourquoi", pas le "comment".</li>
+<li>Pour les sections complexes, ajouter des commentaires expliquant la logique.</li>
+<li>Les commentaires TODO doivent inclure un identifiant de la personne responsable:
+  <div class="highlight"><pre><span></span><code><span class="c1"># TODO(@username): Implémenter la fonction de normalisation</span>
+</code></pre></div></li>
+</ul>
+<h2 id="gestion-des-erreurs">Gestion des erreurs<a class="headerlink" href="#gestion-des-erreurs" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser des exceptions spécifiques, pas des exceptions génériques.</li>
+<li>Définir des exceptions personnalisées dans un module <code>exceptions.py</code>.</li>
+<li>Les messages d'erreur doivent être informatifs et suggérer des solutions.</li>
+</ul>
+<h2 id="tests-unitaires">Tests unitaires<a class="headerlink" href="#tests-unitaires" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Chaque fonction doit avoir au moins un test associé.</li>
+<li>Utiliser pytest comme framework de test.</li>
+<li>Les tests doivent être indépendants les uns des autres.</li>
+<li>Les tests doivent vérifier les cas normaux et les cas limites.</li>
+</ul>
+<h2 id="validation-du-code">Validation du code<a class="headerlink" href="#validation-du-code" title="Permanent link">&para;</a></h2>
+<p>Avant chaque commit, assurez-vous que:
+1. Tous les tests passent (<code>pytest</code>)
+2. Le code est correctement formaté (<code>black .</code> et <code>isort .</code>)
+3. Aucun avertissement n'est signalé par flake8 (<code>flake8</code>)</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
