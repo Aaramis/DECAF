@@ -7,8 +7,8 @@
 
 
 # Outils de développement
-# pytest>=7.0.0
-# pytest-cov>=3.0.0
+pytest
+pytest-cov
 black
 flake8
 isort
