@@ -1,3 +1,7 @@
+![Codecov](https://codecov.io/gh/Aaramis/DECAF/branch/main/graph/badge.svg)
+![Version](https://img.shields.io/github/v/release/votre-username/DECAF)
+![Tests](https://github.com/Aaramis/DECAF/actions/workflows/test-workflow.yml/badge.svg)
+
 # DECAF: DNA Environmental Contaminant Analysis Framework
 
 <!-- Optional Badges -->
