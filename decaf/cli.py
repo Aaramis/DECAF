@@ -2,15 +2,16 @@
 Command Line Interface for DECAF.
 """
 
-import click
+import logging
 import os
 import sys
-import logging
 
-from .config import load_config, get_model_config
+import click
+
+from .config import get_model_config, load_config
+from .data import AmpliconDataset
 from .models import load_model
 from .utils import read_sequences, setup_logger
-from .data import AmpliconDataset
 
 logger = logging.getLogger(__name__)
 

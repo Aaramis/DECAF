@@ -2,10 +2,11 @@
 Utility functions for DECAF.
 """
 
-import os
 import logging
+import os
 import sys
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 

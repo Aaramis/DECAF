@@ -1,16 +1,17 @@
-import unittest
+import logging
 import os
 import tempfile
-import logging
+import unittest
+
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from decaf.utils import (
-    read_sequences,
-    write_sequences,
-    get_sequence_stats,
     convert_file_format,
+    get_sequence_stats,
+    read_sequences,
     setup_logger,
+    write_sequences,
 )
 
 

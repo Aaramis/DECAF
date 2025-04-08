@@ -1,5 +1,6 @@
 import pytest
 from click.testing import CliRunner
+
 from decaf.cli import main
 
 

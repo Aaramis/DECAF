@@ -1,7 +1,8 @@
+from typing import Any, Dict
+
+from Bio.SeqRecord import SeqRecord
 from torch.utils.data import Dataset
 from transformers import PreTrainedTokenizer
-from typing import Dict, Any
-from Bio.SeqRecord import SeqRecord
 
 
 class AmpliconDataset(Dataset):

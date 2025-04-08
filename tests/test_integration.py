@@ -1,17 +1,19 @@
-import unittest
+import json
 import os
 import tempfile
+import unittest
 from unittest.mock import MagicMock, patch
+
 import torch
-import json
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+
+from decaf.config import get_model_config, load_config
 
 # Import modules
 from decaf.data import AmpliconDataset
 from decaf.models import AmpliconClassifier, load_model
 from decaf.utils import read_sequences, write_sequences
-from decaf.config import load_config, get_model_config
 
 
 class TestDECAFIntegration(unittest.TestCase):
