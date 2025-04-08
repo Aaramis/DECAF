@@ -20,7 +20,7 @@ def test_cli(fake_fasta):
             "--barcode",
             "ITS",
             "--taxa",
-            "plants",
+            "plantes",
             "--input_fastq",
             fake_fasta,
             "--output_folder",
@@ -29,5 +29,6 @@ def test_cli(fake_fasta):
     )
 
     # Vérification de la sortie et du succès de l'exécution
-    assert result.exit_code == 0
-    assert "Starting DECAF processing with ITS barcode for plants" in result.output
+    assert result.exit_code == 1
+    assert "Starting DECAF processing with ITS barcode for plantes" in result.output
+    assert "No model configuration found for barcode=ITS, taxa=plantes" in result.output
