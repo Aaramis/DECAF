@@ -122,3 +122,4 @@ This project is licensed under the [Spécifiez votre licence, e.g., MIT License]
 
 
 <!-- decaf -b ITS -t plants -i data/test.fasta  -o output -->
+<!-- coverage run -m pytest -->
