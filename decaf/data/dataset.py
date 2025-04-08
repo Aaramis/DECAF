@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from Bio.SeqRecord import SeqRecord
 from torch.utils.data import Dataset
@@ -8,7 +8,7 @@ from transformers import PreTrainedTokenizer
 class AmpliconDataset(Dataset):
     def __init__(
         self,
-        sequences: SeqRecord,
+        sequences: List[SeqRecord],
         tokenizer: PreTrainedTokenizer,
         config: Dict[str, Any],
     ):
