@@ -4,7 +4,6 @@ import tempfile
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-# Import your modules
 from decaf.utils import (
     read_sequences,
     write_sequences,
