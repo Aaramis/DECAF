@@ -9,7 +9,7 @@ setup(
     ],
     author="Auguste GARDETTE",
     author_email="auguste.gardette@ird.fr",
-    description="DNA Environmental Contaminant Analysis Framework",
+    description="DECAF: DEcontamination and Classification of Amplicon Fragment",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Aaramis/DECAF",
@@ -23,7 +23,7 @@ setup(
     python_requires=">=3.9",
     entry_points={
         "console_scripts": [
-            "decaf=decaf.main:main",
+            "decaf=decaf.cli:main",
         ],
     },
 )

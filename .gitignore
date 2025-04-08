@@ -83,6 +83,8 @@ data/raw/
 models/saved/
 results/
 logs/
-models/
-*env/
+/models
+decaf-env/
 site/
+/data
+output/

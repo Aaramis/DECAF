@@ -118,3 +118,8 @@ More detailed contribution guidelines will be added soon.
 This project is licensed under the [Spécifiez votre licence, e.g., MIT License]. See the LICENSE file for details.
 
 (Action: You should choose a license and add a LICENSE file to your repository. Common choices include MIT, Apache 2.0, and GPL.)
+
+
+
+<!-- decaf -b ITS -t plants -i data/test.fasta  -o output -->
+<!-- coverage run -m pytest -->

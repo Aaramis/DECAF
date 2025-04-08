@@ -1,0 +1,22 @@
+[
+    {
+      "model_name": "ITS_Plant",
+      "barcode": "ITS",
+      "taxa": "plants",
+      "categories": {
+        "1": "plants",
+        "0": "contaminations"
+      },
+      "model_path": "models/ITS_Plant",
+      "preprocessing": {
+        "max_length": 150,
+        "truncation": true,
+        "padding": "max_length"
+      },
+      "training": {
+        "batch_size": 32,
+        "learning_rate": 2e-5,
+        "epochs": 5
+      }
+    }
+  ]
