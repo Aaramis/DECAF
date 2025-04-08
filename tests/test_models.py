@@ -62,7 +62,7 @@ class TestAmpliconClassifier(unittest.TestCase):
 
         # Test that initialization raises ValueError
         with self.assertRaises(ValueError):
-            classifier = AmpliconClassifier(self.model_config)
+            AmpliconClassifier(self.model_config)
 
     @patch("decaf.models.models.AutoTokenizer.from_pretrained")
     @patch("decaf.models.models.AutoModelForSequenceClassification.from_pretrained")
@@ -86,7 +86,3 @@ class TestAmpliconClassifier(unittest.TestCase):
         self.mock_model.assert_called_once_with(
             input_ids=input_ids, attention_mask=attention_mask
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

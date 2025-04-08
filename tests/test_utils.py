@@ -1,6 +1,7 @@
 import unittest
 import os
 import tempfile
+import logging
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
@@ -9,6 +10,7 @@ from decaf.utils import (
     write_sequences,
     get_sequence_stats,
     convert_file_format,
+    setup_logger,
 )
 
 
@@ -35,6 +37,14 @@ class TestUtils(unittest.TestCase):
 
     def tearDown(self):
         self.temp_dir.cleanup()
+
+    def test_setup_logger(self):
+        """Test logger setup"""
+        logger = setup_logger(logging.DEBUG)
+        self.assertEqual(logger.level, logging.DEBUG)
+        self.assertGreater(len(logger.handlers), 0)
+        self.assertIsInstance(logger.handlers[0], logging.StreamHandler)
+
 
     def test_read_sequences(self):
         """Test reading sequences from file"""
@@ -85,7 +95,3 @@ class TestUtils(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             read_sequences(invalid_file)
-
-
-if __name__ == "__main__":
-    unittest.main()

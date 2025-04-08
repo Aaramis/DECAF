@@ -63,7 +63,3 @@ class TestAmpliconDataset(unittest.TestCase):
         self.assertIn("attention_mask", item)
         self.assertIn("sequence_id", item)
         self.assertEqual(item["sequence_id"], "seq1")
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -138,7 +138,3 @@ class TestDECAFIntegration(unittest.TestCase):
 
             # Ensure predictions have the right shape
             self.assertEqual(preds.shape[0], batch_size)
-
-
-if __name__ == "__main__":
-    unittest.main()
