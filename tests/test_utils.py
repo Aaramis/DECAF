@@ -45,7 +45,6 @@ class TestUtils(unittest.TestCase):
         self.assertGreater(len(logger.handlers), 0)
         self.assertIsInstance(logger.handlers[0], logging.StreamHandler)
 
-
     def test_read_sequences(self):
         """Test reading sequences from file"""
         fasta_sequences = read_sequences(self.fasta_file)

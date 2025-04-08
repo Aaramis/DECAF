@@ -16,13 +16,17 @@ def test_cli(fake_fasta):
     result = runner.invoke(
         main,
         [
-            '--barcode', 'ITS',
-            '--taxa', 'plants',
-            '--input_fastq', fake_fasta,
-            '--output_folder', 'output/'
-        ]
+            "--barcode",
+            "ITS",
+            "--taxa",
+            "plants",
+            "--input_fastq",
+            fake_fasta,
+            "--output_folder",
+            "output/",
+        ],
     )
-    
+
     # Vérification de la sortie et du succès de l'exécution
     assert result.exit_code == 0
     assert "Starting DECAF processing with ITS barcode for plants" in result.output
