@@ -4,5 +4,4 @@ from .utils import (
     setup_logger,
     get_sequence_stats,
     convert_file_format,
-    setup_logger,
 )
