@@ -44,5 +44,6 @@ class AmpliconDataset(Dataset):
         return {
             "input_ids": input_ids,
             "attention_mask": attention_mask,
-            "sequence_id": seq_record.id,  # Optional: keep original ID for tracking
+            "sequence_id": seq_record.id,
+            "sequence_str": seq_str,
         }

@@ -41,7 +41,8 @@ class TestUtils(unittest.TestCase):
 
     def test_setup_logger(self):
         """Test logger setup"""
-        logger = setup_logger(logging.DEBUG)
+        setup_logger(logging.DEBUG)
+        logger = logging.getLogger("decaf")
         self.assertEqual(logger.level, logging.DEBUG)
         self.assertGreater(len(logger.handlers), 0)
         self.assertIsInstance(logger.handlers[0], logging.StreamHandler)

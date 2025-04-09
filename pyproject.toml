@@ -11,14 +11,13 @@ exclude = '''(?x)  # Use verbose regex mode for readability
   | \.tox
   | _build
   | decaf-env
-  | decaf/models/*
+  | models
   | buck-out
   | build
   | dist
 
     # Project-specific excludes
-  | decaf-env    # Removed leading \
-  | decaf/models # Changed \ to /
+  | decaf-env
 )/
 '''
 
@@ -26,7 +25,7 @@ exclude = '''(?x)  # Use verbose regex mode for readability
 profile = "black"
 line_length = 88
 multi_line_output = 3
-skip = ["decaf-env", "decaf/models"]
+skip = ["decaf-env", "models"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

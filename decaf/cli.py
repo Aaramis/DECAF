@@ -7,11 +7,13 @@ import os
 import sys
 
 import click
+import pytorch_lightning as pl
+from torch.utils.data import DataLoader
 
 from .config import get_model_config, load_config
 from .data import AmpliconDataset
 from .models import load_model
-from .utils import read_sequences, setup_logger
+from .utils import process_predictions, read_sequences, setup_logger
 
 logger = logging.getLogger(__name__)
 
@@ -44,12 +46,6 @@ logger = logging.getLogger(__name__)
     help="Output folder for results",
 )
 @click.option(
-    "--threshold",
-    default=0.5,
-    type=float,
-    help="Classification threshold (default: 0.5)",
-)
-@click.option(
     "--batch_size",
     default=32,
     type=int,
@@ -77,7 +73,6 @@ def main(
     taxa: str,
     input_fastq: str,
     output_folder: str,
-    threshold: float = 0.5,
     batch_size: int = 32,
     cpus: int = 1,
     gpus: int = 0,
@@ -124,22 +119,34 @@ def main(
         config=model_config.get("preprocessing", {}),
     )
 
-    print(dataset)
-    # # Classify sequences
-    # logger.info("Classifying sequences")
-    # classified_sequences = classify_sequences(
-    #     sequences,
-    #     model,
-    #     model_config,
-    #     threshold=threshold,
-    #     batch_size=batch_size
-    # )
+    # Create DataLoader
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        num_workers=cpus,
+        shuffle=False,
+    )
 
-    # logger.info(f"Writing target sequences to: {target_output}")
-    # write_sequences(classified_sequences['target'], target_output)
+    # Initialize trainer
+    trainer = pl.Trainer(
+        accelerator="gpu" if gpus > 0 else "cpu",
+        devices=gpus if gpus > 0 else "auto",
+        logger=False,
+    )
 
-    # logger.info(f"Writing contaminant sequences to: {contam_output}")
-    # write_sequences(classified_sequences['contaminant'], contam_output)
+    # Run predictions
+    logger.info("Starting predictions...")
+    predictions = trainer.predict(model, dataloader)
+
+    # Process predictions and write output files
+    logger.info("Processing predictions and writing output files...")
+    process_predictions(
+        predictions=predictions,
+        model_config=model_config,
+        output_folder=output_folder,
+        input_file=input_fastq,
+    )
+    logger.info("DECAF processing completed successfully")
 
 
 if __name__ == "__main__":
