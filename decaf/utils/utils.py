@@ -5,7 +5,7 @@ Utility functions for DECAF.
 import logging
 import os
 import sys
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 from Bio import SeqIO
 from Bio.Seq import Seq
@@ -155,7 +155,7 @@ def convert_file_format(input_file: str, output_file: str) -> None:
 
 
 def process_predictions(
-    predictions: List[Dict[str, Any]],
+    predictions: Union[List[Dict[str, Any]], List[List[Dict[str, Any]]], None],
     model_config: Dict[str, Any],
     output_folder: str,
     input_file: str,
@@ -169,9 +169,19 @@ def process_predictions(
         output_folder: Output directory path
         input_file: Path to the input file (for determining format)
     """
+    processed_predictions: List[Dict[str, Any]] = []
+
+    if predictions is not None:
+        # Flatten predictions if they're nested
+        for batch in predictions:
+            if isinstance(batch, list):
+                processed_predictions.extend(batch)
+            else:
+                processed_predictions.append(batch)
+
     format_type = determine_file_format(input_file)
     categories = get_categories_from_config(model_config)
-    classified_seqs = classify_sequences(predictions, categories, format_type)
+    classified_seqs = classify_sequences(processed_predictions, categories, format_type)
     write_classified_sequences(classified_seqs, output_folder, input_file, format_type)
 
 
@@ -225,12 +235,16 @@ def classify_sequences(
     Returns:
         Dictionary mapping categories to classified sequences
     """
-    classified_seqs = {category: [] for category in categories.values()}
+    classified_seqs: Dict[str, List[SeqRecord]] = {
+        category: [] for category in categories.values()
+    }
 
     for batch in predictions:
         process_prediction_batch(batch, categories, format_type, classified_seqs)
 
     return classified_seqs
+
+    # predictions: Union[List[Dict[str, Any]], List[List[Dict[str, Any]]], None],
 
 
 def process_prediction_batch(
