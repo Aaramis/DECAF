@@ -110,14 +110,13 @@ More detailed contribution guidelines will be added soon.
 
 ## Contributors
 
-- [Your Name/GitHub Handle](Your GitHub Link)
+- [Auguste_GARDETTE](https://github.com/Aaramis)
 - Feel free to add yourself here when you contribute!
 
 ## License
 
-This project is licensed under the [Spécifiez votre licence, e.g., MIT License]. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-(Action: You should choose a license and add a LICENSE file to your repository. Common choices include MIT, Apache 2.0, and GPL.)
 
 
 

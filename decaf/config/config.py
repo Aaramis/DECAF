@@ -69,5 +69,5 @@ def save_config(
         config_path: Path to the configuration file
     """
     with open(config_path, "w") as f:
-        json.dump(configs, f, indent=2)
+        f.write(json.dumps(configs, indent=2))
     logger.info(f"Configuration saved to: {config_path}")

@@ -41,7 +41,8 @@ class TestUtils(unittest.TestCase):
 
     def test_setup_logger(self):
         """Test logger setup"""
-        logger = setup_logger(logging.DEBUG)
+        setup_logger(logging.DEBUG)
+        logger = logging.getLogger("decaf")
         self.assertEqual(logger.level, logging.DEBUG)
         self.assertGreater(len(logger.handlers), 0)
         self.assertIsInstance(logger.handlers[0], logging.StreamHandler)
@@ -95,3 +96,42 @@ class TestUtils(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             read_sequences(invalid_file)
+
+    def test_convert_file_format_invalid_input(self):
+        """Test conversion with an unsupported input file format"""
+        invalid_input_file = os.path.join(self.temp_dir.name, "test.txt")
+        with open(invalid_input_file, "w") as f:
+            f.write("Invalid content")
+
+        invalid_output_file = os.path.join(self.temp_dir.name, "output.fasta")
+
+        # Test that it raises a ValueError for unsupported input file format
+        with self.assertRaises(ValueError):
+            convert_file_format(invalid_input_file, invalid_output_file)
+
+    def test_convert_file_format_invalid_output(self):
+        """Test conversion with an unsupported output file format"""
+        invalid_input_file = os.path.join(self.temp_dir.name, "test.fasta")
+        with open(invalid_input_file, "w") as f:
+            f.write(">seq1\nATGCTAGCTAGCT\n")
+
+        invalid_output_file = os.path.join(self.temp_dir.name, "output.txt")
+
+        # Test that it raises a ValueError for unsupported output file format
+        with self.assertRaises(ValueError):
+            convert_file_format(invalid_input_file, invalid_output_file)
+
+    def test_write_sequences_invalid_output(self):
+        """Test writing sequences with an unsupported output file format"""
+        # Prepare the sequences
+        test_sequences = [
+            SeqRecord(Seq("ATGCTAGCTAGCT"), id="seq1", description="test sequence 1"),
+            SeqRecord(Seq("GCATCGATCGATCG"), id="seq2", description="test sequence 2"),
+        ]
+
+        # Define an invalid output file format
+        invalid_output_file = os.path.join(self.temp_dir.name, "output.txt")
+
+        # Test that it raises a ValueError for unsupported output file format
+        with self.assertRaises(ValueError):
+            write_sequences(test_sequences, invalid_output_file)
