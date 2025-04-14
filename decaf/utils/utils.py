@@ -159,6 +159,7 @@ def process_predictions(
     model_config: Dict[str, Any],
     output_folder: str,
     input_file: str,
+    threshold: float = 0.5,
 ) -> None:
     """
     Process model predictions and write sequences to classified files.
@@ -168,6 +169,7 @@ def process_predictions(
         model_config: Model configuration dictionary
         output_folder: Output directory path
         input_file: Path to the input file (for determining format)
+        threshold: Confidence threshold for classification (default: 0.5)
     """
     processed_predictions: List[Dict[str, Any]] = []
 
@@ -181,7 +183,9 @@ def process_predictions(
 
     format_type = determine_file_format(input_file)
     categories = get_categories_from_config(model_config)
-    classified_seqs = classify_sequences(processed_predictions, categories, format_type)
+    classified_seqs = classify_sequences(
+        processed_predictions, categories, format_type, threshold
+    )
     write_classified_sequences(classified_seqs, output_folder, input_file, format_type)
 
 
@@ -223,6 +227,7 @@ def classify_sequences(
     predictions: List[Dict[str, Any]],
     categories: Dict[str, str],
     format_type: str,
+    threshold: float = 0.5,  # Add threshold parameter
 ) -> Dict[str, List[SeqRecord]]:
     """
     Classify sequences based on model predictions.
@@ -231,20 +236,23 @@ def classify_sequences(
         predictions: List of prediction batches
         categories: Category mapping
         format_type: Input file format
+        threshold: Confidence threshold for classification
 
     Returns:
         Dictionary mapping categories to classified sequences
     """
+    # Initialize with all categories plus "unclassified"
     classified_seqs: Dict[str, List[SeqRecord]] = {
         category: [] for category in categories.values()
     }
+    classified_seqs["unclassified"] = []  # Add "unclassified" category
 
     for batch in predictions:
-        process_prediction_batch(batch, categories, format_type, classified_seqs)
+        process_prediction_batch(
+            batch, categories, format_type, classified_seqs, threshold
+        )
 
     return classified_seqs
-
-    # predictions: Union[List[Dict[str, Any]], List[List[Dict[str, Any]]], None],
 
 
 def process_prediction_batch(
@@ -252,16 +260,17 @@ def process_prediction_batch(
     categories: Dict[str, str],
     format_type: str,
     classified_seqs: Dict[str, List[SeqRecord]],
+    threshold: float = 0.5,  # Add threshold parameter
 ) -> None:
     """
     Process a single batch of predictions and classify sequences.
 
     Args:
         batch: Prediction batch
-        sequences: Original sequences
         categories: Category mapping
         format_type: Input file format
         classified_seqs: Dictionary to store classified sequences
+        threshold: Confidence threshold for classification
     """
     sequence_ids = batch["sequence_ids"]
     sequence_strs = batch["sequence_strs"]
@@ -271,7 +280,12 @@ def process_prediction_batch(
     for seq_id, seq_str, pred, conf in zip(
         sequence_ids, sequence_strs, batch_preds, batch_confs
     ):
-        category = categories.get(str(pred.item()), "unknown")
+        # Check if confidence is below threshold
+        if conf < threshold:
+            category = "unclassified"
+        else:
+            category = categories.get(str(pred.item()), "unknown")
+
         classified_seq = create_classified_sequence(
             seq_str,
             seq_id,

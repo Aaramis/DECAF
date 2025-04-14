@@ -116,18 +116,24 @@ class TestNewUtilsFunctions(unittest.TestCase):
         """Test sequence classification directly without mocking"""
         categories = {"0": "bacteria", "1": "virus", "2": "host"}
 
-        # Test the function with actual data
-        classified_seqs = classify_sequences(self.test_predictions, categories, "fasta")
+        # Test the function with actual data and default threshold
+        classified_seqs = classify_sequences(
+            self.test_predictions, categories, "fasta", threshold=0.5
+        )
 
         # Check that the function returned the expected dictionary structure
         self.assertIn("bacteria", classified_seqs)
         self.assertIn("virus", classified_seqs)
         self.assertIn("host", classified_seqs)
+        self.assertIn("unclassified", classified_seqs)
 
         # Check that sequences were classified correctly
         self.assertEqual(len(classified_seqs["bacteria"]), 1)
         self.assertEqual(len(classified_seqs["virus"]), 1)
         self.assertEqual(len(classified_seqs["host"]), 0)
+        self.assertEqual(
+            len(classified_seqs["unclassified"]), 0
+        )  # None below threshold
 
         # Check bacteria sequence
         bact_seq = classified_seqs["bacteria"][0]
@@ -138,6 +144,41 @@ class TestNewUtilsFunctions(unittest.TestCase):
         virus_seq = classified_seqs["virus"][0]
         self.assertEqual(virus_seq.id, "seq2")
         self.assertEqual(str(virus_seq.seq), "GCATCGATCGATCG")
+
+    def test_classify_sequences_with_threshold(self):
+        """Test sequence classification with confidence threshold"""
+        categories = {"0": "bacteria", "1": "virus", "2": "host"}
+
+        # Test with normal threshold (should classify as usual)
+        classified_seqs = classify_sequences(
+            self.test_predictions, categories, "fasta", threshold=0.5
+        )
+
+        # Check that "unclassified" category exists
+        self.assertIn("unclassified", classified_seqs)
+
+        # Check that sequences were still classified (both confidences are > 0.5)
+        self.assertEqual(len(classified_seqs["bacteria"]), 1)
+        self.assertEqual(len(classified_seqs["virus"]), 1)
+        self.assertEqual(len(classified_seqs["unclassified"]), 0)
+
+        # Test with high threshold (should classify both as unclassified)
+        classified_seqs = classify_sequences(
+            self.test_predictions, categories, "fasta", threshold=0.99
+        )
+
+        self.assertEqual(len(classified_seqs["bacteria"]), 0)
+        self.assertEqual(len(classified_seqs["virus"]), 0)
+        self.assertEqual(len(classified_seqs["unclassified"]), 2)
+
+        # Test with medium threshold (should classify only one)
+        classified_seqs = classify_sequences(
+            self.test_predictions, categories, "fasta", threshold=0.9
+        )
+
+        self.assertEqual(len(classified_seqs["bacteria"]), 1)  # 0.95 > 0.9
+        self.assertEqual(len(classified_seqs["virus"]), 0)  # 0.87 < 0.9
+        self.assertEqual(len(classified_seqs["unclassified"]), 1)
 
     def test_process_prediction_batch(self):
         """Test processing prediction batch"""
@@ -186,6 +227,32 @@ class TestNewUtilsFunctions(unittest.TestCase):
         unknown_seq = classified_seqs["unknown"][0]
         self.assertEqual(unknown_seq.id, "seq3")
 
+    def test_process_prediction_batch_with_threshold(self):
+        """Test processing prediction batch with threshold"""
+        categories = {"0": "bacteria", "1": "virus", "2": "host"}
+        classified_seqs = {category: [] for category in categories.values()}
+        classified_seqs["unclassified"] = []  # Add unclassified category
+
+        batch = {
+            "sequence_ids": ["seq1", "seq2", "seq3"],
+            "sequence_strs": ["ATGCTAGCTAGCT", "GCATCGATCGATCG", "ATATAGCGCGCTAT"],
+            "predictions": torch.tensor([0, 1, 2]),
+            "confidences": torch.tensor([0.95, 0.6, 0.3]),
+        }
+
+        # Test with threshold 0.7
+        process_prediction_batch(
+            batch, categories, "fasta", classified_seqs, threshold=0.7
+        )
+
+        # Check that sequences were classified correctly with threshold
+        self.assertEqual(len(classified_seqs["bacteria"]), 1)  # 0.95 > 0.7
+        self.assertEqual(len(classified_seqs["virus"]), 0)  # 0.6 < 0.7
+        self.assertEqual(len(classified_seqs["host"]), 0)  # 0.3 < 0.7
+        self.assertEqual(
+            len(classified_seqs["unclassified"]), 2
+        )  # 2 sequences below threshold
+
     def test_process_predictions(self):
         """Test the process_predictions function directly without mocking"""
         # Create output folder
@@ -216,6 +283,48 @@ class TestNewUtilsFunctions(unittest.TestCase):
             content = f.read()
             self.assertIn(">seq2", content)
             self.assertIn("GCATCGATCGATCG", content)
+
+    def test_process_predictions_with_threshold(self):
+        """Test the process_predictions function with threshold"""
+        # Create output folder
+        output_folder = os.path.join(self.temp_dir.name, "output_threshold")
+        os.makedirs(output_folder, exist_ok=True)
+
+        # Add a low confidence prediction
+        test_predictions_with_low_conf = [
+            {
+                "sequence_ids": ["seq1", "seq2", "seq3"],
+                "sequence_strs": ["ATGCTAGCTAGCT", "GCATCGATCGATCG", "ATATAGCGCGCTAT"],
+                "predictions": torch.tensor([0, 1, 2]),
+                "confidences": torch.tensor([0.95, 0.6, 0.3]),
+            }
+        ]
+
+        # Call the function with threshold
+        process_predictions(
+            test_predictions_with_low_conf,
+            self.model_config,
+            output_folder,
+            self.fasta_file,
+            threshold=0.7,  # Set threshold to 0.7
+        )
+
+        # Check that output files were created
+        bacteria_file = os.path.join(output_folder, "classified_bacteria.fasta")
+        unclassified_file = os.path.join(output_folder, "classified_unclassified.fasta")
+
+        self.assertTrue(os.path.exists(bacteria_file))
+        self.assertTrue(os.path.exists(unclassified_file))
+
+        # Check file contents
+        with open(bacteria_file, "r") as f:
+            content = f.read()
+            self.assertIn(">seq1", content)  # Only seq1 has high enough confidence
+
+        with open(unclassified_file, "r") as f:
+            content = f.read()
+            self.assertIn(">seq2", content)  # seq2 and seq3 should be unclassified
+            self.assertIn(">seq3", content)
 
     def test_write_classified_sequences(self):
         """Test writing classified sequences to files"""

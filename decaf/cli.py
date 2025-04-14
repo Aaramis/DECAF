@@ -52,16 +52,24 @@ logger = logging.getLogger(__name__)
     help="Batch size for processing (default: 32)",
 )
 @click.option(
+    "-c",
     "--cpus",
     default=1,
     type=int,
     help="Number of CPU cores to use (default: 1)",
 )
 @click.option(
+    "-g",
     "--gpus",
     default=0,
     type=int,
     help="Number of GPUs to use (default: 0)",
+)
+@click.option(
+    "--threshold",
+    default=0.5,
+    type=float,
+    help="Confidence threshold for classification (default: 0.5)",
 )
 @click.option(
     "--verbose",
@@ -77,6 +85,7 @@ def main(
     cpus: int = 1,
     gpus: int = 0,
     verbose: bool = False,
+    threshold: float = 0.5,
 ) -> None:
     """
     DECAF: DEcontamination and Classification of Amplicon Fragment
@@ -145,6 +154,7 @@ def main(
         model_config=model_config,
         output_folder=output_folder,
         input_file=input_fastq,
+        threshold=threshold,
     )
     logger.info("DECAF processing completed successfully")
 
