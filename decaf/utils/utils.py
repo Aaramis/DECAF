@@ -1,5 +1,35 @@
 """
 Utility functions for DECAF.
+
+This module provides utility functions for file operations, sequence handling,
+logging setup, and results processing for the DECAF project.
+
+Functions
+---------
+setup_logger
+    Set up the logger for the application.
+read_sequences
+    Read biological sequences from FASTQ or FASTA files.
+write_sequences
+    Write biological sequences to FASTQ or FASTA files.
+get_sequence_stats
+    Calculate statistics for a list of sequences.
+convert_file_format
+    Convert between FASTQ and FASTA formats.
+process_predictions
+    Process model predictions and write sequences to classified files.
+determine_file_format
+    Determine the file format based on the input file extension.
+get_categories_from_config
+    Extract category mapping from model configuration.
+classify_sequences
+    Classify sequences based on model predictions.
+process_prediction_batch
+    Process a single batch of predictions and classify sequences.
+create_classified_sequence
+    Create a new SeqRecord with classification metadata.
+write_classified_sequences
+    Write classified sequences to separate files.
 """
 
 import logging
@@ -18,11 +48,16 @@ def setup_logger(level: int = logging.INFO) -> None:
     """
     Set up the logger for the application.
 
-    Args:
-        level: Logging level
+    Parameters
+    ----------
+    level : int, default=logging.INFO
+        Logging level
 
-    Returns:
-        Configured logger
+    Examples
+    --------
+    >>> setup_logger(logging.DEBUG)
+    >>> logger = logging.getLogger("decaf")
+    >>> logger.debug("Debug message")
     """
     logger = logging.getLogger("decaf")
     logger.setLevel(level)
@@ -45,14 +80,28 @@ def read_sequences(input_file: str) -> List[SeqRecord]:
     """
     Read sequences from a FASTQ or FASTA file.
 
-    Args:
-        input_file: Path to the input file
+    Parameters
+    ----------
+    input_file : str
+        Path to the input file
 
-    Returns:
-        List of SeqRecord objects
+    Returns
+    -------
+    list of SeqRecord
+        List of BioPython SeqRecord objects
 
-    Raises:
-        ValueError: If the file format is not supported
+    Raises
+    ------
+    ValueError
+        If the file format is not supported
+
+    Examples
+    --------
+    >>> sequences = read_sequences("sample.fastq")
+    >>> len(sequences)
+    42
+    >>> sequences[0].id
+    'seq1'
     """
     file_ext = os.path.splitext(input_file)[1].lower()
 
@@ -73,12 +122,25 @@ def write_sequences(sequences: List[SeqRecord], output_file: str) -> None:
     """
     Write sequences to a FASTQ or FASTA file.
 
-    Args:
-        sequences: List of SeqRecord objects
-        output_file: Path to the output file
+    Parameters
+    ----------
+    sequences : list of SeqRecord
+        List of BioPython SeqRecord objects
+    output_file : str
+        Path to the output file
 
-    Raises:
-        ValueError: If the file format is not supported
+    Raises
+    ------
+    ValueError
+        If the file format is not supported
+
+    Examples
+    --------
+    >>> from Bio.Seq import Seq
+    >>> from Bio.SeqRecord import SeqRecord
+    >>> seq1 = SeqRecord(Seq("ACGT"), id="seq1")
+    >>> seq2 = SeqRecord(Seq("TGCA"), id="seq2")
+    >>> write_sequences([seq1, seq2], "output.fasta")
     """
     file_ext = os.path.splitext(output_file)[1].lower()
 
@@ -97,11 +159,28 @@ def get_sequence_stats(sequences: List[SeqRecord]) -> Dict[str, Any]:
     """
     Calculate statistics for a list of sequences.
 
-    Args:
-        sequences: List of SeqRecord objects
+    Parameters
+    ----------
+    sequences : list of SeqRecord
+        List of BioPython SeqRecord objects
 
-    Returns:
-        Dictionary with sequence statistics
+    Returns
+    -------
+    dict
+        Dictionary with sequence statistics including:
+        - count: Total number of sequences
+        - min_length: Length of shortest sequence
+        - max_length: Length of longest sequence
+        - avg_length: Average sequence length
+
+    Examples
+    --------
+    >>> sequences = read_sequences("sample.fasta")
+    >>> stats = get_sequence_stats(sequences)
+    >>> stats["count"]
+    100
+    >>> stats["avg_length"]
+    250.5
     """
     if not sequences:
         return {"count": 0, "min_length": 0, "max_length": 0, "avg_length": 0}
@@ -120,12 +199,21 @@ def convert_file_format(input_file: str, output_file: str) -> None:
     """
     Convert between FASTQ and FASTA formats.
 
-    Args:
-        input_file: Path to the input file
-        output_file: Path to the output file
+    Parameters
+    ----------
+    input_file : str
+        Path to the input file
+    output_file : str
+        Path to the output file
 
-    Raises:
-        ValueError: If the file format is not supported
+    Raises
+    ------
+    ValueError
+        If the file format is not supported
+
+    Examples
+    --------
+    >>> convert_file_format("input.fastq", "output.fasta")
     """
     in_ext = os.path.splitext(input_file)[1].lower()
     out_ext = os.path.splitext(output_file)[1].lower()
@@ -164,12 +252,22 @@ def process_predictions(
     """
     Process model predictions and write sequences to classified files.
 
-    Args:
-        predictions: List of prediction batches from predict_step
-        model_config: Model configuration dictionary
-        output_folder: Output directory path
-        input_file: Path to the input file (for determining format)
-        threshold: Confidence threshold for classification (default: 0.5)
+    Parameters
+    ----------
+    predictions : list of dict or list of list of dict or None
+        List of prediction batches from predict_step
+    model_config : dict
+        Model configuration dictionary
+    output_folder : str
+        Output directory path
+    input_file : str
+        Path to the input file (for determining format)
+    threshold : float, default=0.5
+        Confidence threshold for classification
+
+    Examples
+    --------
+    >>> process_predictions(predictions, model_config, "output_dir", "input.fasta", 0.7)
     """
     processed_predictions: List[Dict[str, Any]] = []
 
@@ -193,14 +291,26 @@ def determine_file_format(input_file: str) -> str:
     """
     Determine the file format based on the input file extension.
 
-    Args:
-        input_file: Path to the input file
+    Parameters
+    ----------
+    input_file : str
+        Path to the input file
 
-    Returns:
+    Returns
+    -------
+    str
         The file format ('fasta' or 'fastq')
 
-    Raises:
-        ValueError: If the file format is not supported
+    Raises
+    ------
+    ValueError
+        If the file format is not supported
+
+    Examples
+    --------
+    >>> format_type = determine_file_format("sequences.fasta")
+    >>> format_type
+    'fasta'
     """
     file_ext = os.path.splitext(input_file)[1].lower()
     if file_ext in [".fastq", ".fq"]:
@@ -214,11 +324,22 @@ def get_categories_from_config(model_config: Dict[str, Any]) -> Dict[str, str]:
     """
     Extract category mapping from model configuration.
 
-    Args:
-        model_config: Model configuration dictionary
+    Parameters
+    ----------
+    model_config : dict
+        Model configuration dictionary
 
-    Returns:
+    Returns
+    -------
+    dict
         Dictionary mapping prediction IDs to category names
+
+    Examples
+    --------
+    >>> config = {"categories": {"0": "fungi", "1": "plants"}}
+    >>> categories = get_categories_from_config(config)
+    >>> categories["0"]
+    'fungi'
     """
     return model_config.get("categories", {})
 
@@ -227,19 +348,32 @@ def classify_sequences(
     predictions: List[Dict[str, Any]],
     categories: Dict[str, str],
     format_type: str,
-    threshold: float = 0.5,  # Add threshold parameter
+    threshold: float = 0.5,
 ) -> Dict[str, List[SeqRecord]]:
     """
     Classify sequences based on model predictions.
 
-    Args:
-        predictions: List of prediction batches
-        categories: Category mapping
-        format_type: Input file format
-        threshold: Confidence threshold for classification
+    Parameters
+    ----------
+    predictions : list of dict
+        List of prediction batches
+    categories : dict
+        Category mapping
+    format_type : str
+        Input file format
+    threshold : float, default=0.5
+        Confidence threshold for classification
 
-    Returns:
+    Returns
+    -------
+    dict
         Dictionary mapping categories to classified sequences
+
+    Examples
+    --------
+    >>> classified = classify_sequences(predictions, categories, "fasta", 0.6)
+    >>> len(classified["fungi"])
+    23
     """
     # Initialize with all categories plus "unclassified"
     classified_seqs: Dict[str, List[SeqRecord]] = {
@@ -260,17 +394,27 @@ def process_prediction_batch(
     categories: Dict[str, str],
     format_type: str,
     classified_seqs: Dict[str, List[SeqRecord]],
-    threshold: float = 0.5,  # Add threshold parameter
+    threshold: float = 0.5,
 ) -> None:
     """
     Process a single batch of predictions and classify sequences.
 
-    Args:
-        batch: Prediction batch
-        categories: Category mapping
-        format_type: Input file format
-        classified_seqs: Dictionary to store classified sequences
-        threshold: Confidence threshold for classification
+    Parameters
+    ----------
+    batch : dict
+        Prediction batch
+    categories : dict
+        Category mapping
+    format_type : str
+        Input file format
+    classified_seqs : dict
+        Dictionary to store classified sequences
+    threshold : float, default=0.5
+        Confidence threshold for classification
+
+    Examples
+    --------
+    >>> process_prediction_batch(batch, categories, "fasta", classified_seqs, 0.7)
     """
     sequence_ids = batch["sequence_ids"]
     sequence_strs = batch["sequence_strs"]
@@ -306,15 +450,29 @@ def create_classified_sequence(
     """
     Create a new SeqRecord with classification metadata.
 
-    Args:
-        original_seq: Original sequence string
-        original_id: Original suequence id
-        category: Predicted category
-        confidence: Prediction confidence
-        format_type: Input file format
+    Parameters
+    ----------
+    original_seq : str
+        Original sequence string
+    original_id : str
+        Original sequence id
+    category : str
+        Predicted category
+    confidence : float
+        Prediction confidence
+    format_type : str
+        Input file format
 
-    Returns:
+    Returns
+    -------
+    SeqRecord
         New SeqRecord with classification info
+
+    Examples
+    --------
+    >>> seq = create_classified_sequence("ACGT", "seq1", "fungi", 0.95, "fasta")
+    >>> seq.description
+    ' DECAF_pred=fungi DECAF_confidence=0.9500'
     """
     new_seq = SeqRecord(
         seq=Seq(original_seq),
@@ -337,11 +495,20 @@ def write_classified_sequences(
     """
     Write classified sequences to separate files in single-line FASTA format.
 
-    Args:
-        classified_seqs: Dictionary of classified sequences
-        output_folder: Output directory path
-        input_file: Original input file path (for extension)
-        format_type: File format ('fasta' or 'fastq')
+    Parameters
+    ----------
+    classified_seqs : dict
+        Dictionary of classified sequences
+    output_folder : str
+        Output directory path
+    input_file : str
+        Original input file path (for extension)
+    format_type : str
+        File format ('fasta' or 'fastq')
+
+    Examples
+    --------
+    >>> write_classified_sequences(classified_seqs, "results", "input.fasta", "fasta")
     """
     file_ext = os.path.splitext(input_file)[1].lower()
 
