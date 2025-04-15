@@ -6,25 +6,83 @@ from transformers import PreTrainedTokenizer
 
 
 class AmpliconDataset(Dataset):
+    """
+    Dataset for amplicon sequences used in transformer models.
+
+    This class provides a PyTorch Dataset implementation for biological
+    amplicon sequences, handling tokenization and preparation for model input.
+
+    Parameters
+    ----------
+    sequences : list of SeqRecord
+        List of BioPython SeqRecord objects (from FASTQ/FASTA)
+    tokenizer : PreTrainedTokenizer
+        A HuggingFace tokenizer to convert sequences into tokens
+    config : dict
+        Configuration dictionary containing parameters like max_length
+
+    Attributes
+    ----------
+    sequences : list
+        The list of sequence records
+    tokenizer : PreTrainedTokenizer
+        The tokenizer instance
+    max_length : int
+        Maximum sequence length for padding/truncation
+    """
+
     def __init__(
         self,
         sequences: List[SeqRecord],
         tokenizer: PreTrainedTokenizer,
         config: Dict[str, Any],
     ):
-        """
-        Args:
-            sequences: List of BioPython SeqRecord objects (from FASTQ/FASTA)
-            tokenizer: A HuggingFace tokenizer
-        """
         self.sequences = sequences
         self.tokenizer = tokenizer
         self.max_length = config["max_length"]
 
-    def __len__(self):
+    def __len__(self) -> int:
+        """
+        Get the number of sequences in the dataset.
+
+        Returns
+        -------
+        int
+            Number of sequences
+
+        Examples
+        --------
+        >>> dataset = AmpliconDataset(sequences, tokenizer, config)
+        >>> len(dataset)
+        150
+        """
         return len(self.sequences)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int) -> Dict[str, Any]:
+        """
+        Get a tokenized sequence by index.
+
+        Parameters
+        ----------
+        idx : int
+            Index of the sequence to retrieve
+
+        Returns
+        -------
+        dict
+            Dictionary containing:
+            - input_ids: Tensor of token IDs
+            - attention_mask: Tensor indicating non-padded tokens
+            - sequence_id: Original sequence identifier
+            - sequence_str: Original sequence string
+
+        Examples
+        --------
+        >>> dataset = AmpliconDataset(sequences, tokenizer, config)
+        >>> item = dataset[0]
+        >>> item["input_ids"].shape
+        torch.Size([512])
+        """
         seq_record = self.sequences[idx]
         seq_str = str(seq_record.seq)  # Convert Seq to string
 

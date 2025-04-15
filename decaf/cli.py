@@ -1,5 +1,13 @@
 """
 Command Line Interface for DECAF.
+
+This module provides the command-line interface for the DECAF project,
+enabling classification and decontamination of amplicon sequencing data.
+
+Functions
+---------
+main
+    Main entry point for DECAF command line interface.
 """
 
 import logging
@@ -52,16 +60,24 @@ logger = logging.getLogger(__name__)
     help="Batch size for processing (default: 32)",
 )
 @click.option(
+    "-c",
     "--cpus",
     default=1,
     type=int,
     help="Number of CPU cores to use (default: 1)",
 )
 @click.option(
+    "-g",
     "--gpus",
     default=0,
     type=int,
     help="Number of GPUs to use (default: 0)",
+)
+@click.option(
+    "--threshold",
+    default=0.5,
+    type=float,
+    help="Confidence threshold for classification (default: 0.5)",
 )
 @click.option(
     "--verbose",
@@ -77,11 +93,33 @@ def main(
     cpus: int = 1,
     gpus: int = 0,
     verbose: bool = False,
+    threshold: float = 0.5,
 ) -> None:
     """
-    DECAF: DEcontamination and Classification of Amplicon Fragment
+    DECAF: DEcontamination and Classification of Amplicon Fragment.
 
     Classify and decontaminate amplicon sequencing data.
+
+    Parameters
+    ----------
+    barcode : str
+        Molecular barcode type (e.g., ITS)
+    taxa : str
+        Target taxonomic group (e.g., plants)
+    input_fastq : str
+        Input FASTQ or FASTA file with sequences to classify
+    output_folder : str
+        Output folder for results
+    batch_size : int, default=32
+        Batch size for processing
+    cpus : int, default=1
+        Number of CPU cores to use
+    gpus : int, default=0
+        Number of GPUs to use
+    verbose : bool, default=False
+        Enable verbose output
+    threshold : float, default=0.5
+        Confidence threshold for classification
     """
     # Setup logging
     log_level = logging.DEBUG if verbose else logging.INFO
@@ -145,6 +183,7 @@ def main(
         model_config=model_config,
         output_folder=output_folder,
         input_file=input_fastq,
+        threshold=threshold,
     )
     logger.info("DECAF processing completed successfully")
 
