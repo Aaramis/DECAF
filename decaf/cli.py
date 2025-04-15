@@ -97,9 +97,9 @@ def main(
 ) -> None:
     """
     DECAF: DEcontamination and Classification of Amplicon Fragment.
-    
+
     Classify and decontaminate amplicon sequencing data.
-    
+
     Parameters
     ----------
     barcode : str
