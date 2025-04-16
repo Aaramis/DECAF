@@ -22,6 +22,11 @@ class TestAmpliconDataset(unittest.TestCase):
             SeqRecord(Seq("ATGCTAGCTAGCT"), id="seq1"),
             SeqRecord(Seq("GCATCGATCGATCG"), id="seq2"),
             SeqRecord(Seq("TACGTACGAT"), id="seq3"),
+            SeqRecord(
+                Seq("AGTCAGTC"),
+                id="seq4",
+                letter_annotations={"phred_quality": [40] * 8},
+            ),
         ]
 
         # Config for dataset
@@ -35,7 +40,7 @@ class TestAmpliconDataset(unittest.TestCase):
             config=self.config,
         )
 
-        self.assertEqual(len(dataset), 3)
+        self.assertEqual(len(dataset), 4)
         self.assertEqual(dataset.max_length, 10)
         self.assertEqual(dataset.sequences, self.test_sequences)
         self.assertEqual(dataset.tokenizer, self.mock_tokenizer)
@@ -64,3 +69,17 @@ class TestAmpliconDataset(unittest.TestCase):
         self.assertIn("attention_mask", item)
         self.assertIn("sequence_id", item)
         self.assertEqual(item["sequence_id"], "seq1")
+
+    def test_dataset_getitem_with_phred_quality(self):
+        """Test __getitem__ with phred_quality present"""
+        dataset = AmpliconDataset(
+            sequences=self.test_sequences,
+            tokenizer=self.mock_tokenizer,
+            config=self.config,
+        )
+
+        item = dataset[3]
+        expected_quality = "I" * 8
+
+        self.assertEqual(item["seq_quality"], expected_quality)
+        self.assertEqual(item["sequence_id"], "seq4")

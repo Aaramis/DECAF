@@ -188,5 +188,5 @@ def main(
     logger.info("DECAF processing completed successfully")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

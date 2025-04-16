@@ -74,6 +74,7 @@ class AmpliconDataset(Dataset):
             - input_ids: Tensor of token IDs
             - attention_mask: Tensor indicating non-padded tokens
             - sequence_id: Original sequence identifier
+            - seq_quality: Original sequence quality
             - sequence_str: Original sequence string
 
         Examples
@@ -84,7 +85,12 @@ class AmpliconDataset(Dataset):
         torch.Size([512])
         """
         seq_record = self.sequences[idx]
-        seq_str = str(seq_record.seq)  # Convert Seq to string
+        seq_str = str(seq_record.seq)
+        if "phred_quality" in seq_record.letter_annotations:
+            phred_scores = seq_record.letter_annotations["phred_quality"]
+            seq_quality = "".join(chr(q + 33) for q in phred_scores)
+        else:
+            seq_quality = ""
 
         # Tokenization
         encoded = self.tokenizer(
@@ -103,5 +109,6 @@ class AmpliconDataset(Dataset):
             "input_ids": input_ids,
             "attention_mask": attention_mask,
             "sequence_id": seq_record.id,
+            "seq_quality": seq_quality,
             "sequence_str": seq_str,
         }

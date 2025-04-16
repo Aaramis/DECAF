@@ -1,6 +1,5 @@
 from .utils import (
     classify_sequences,
-    convert_file_format,
     create_classified_sequence,
     determine_file_format,
     get_categories_from_config,

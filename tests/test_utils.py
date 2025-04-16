@@ -7,7 +7,6 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from decaf.utils import (
-    convert_file_format,
     get_sequence_stats,
     read_sequences,
     setup_logger,
@@ -76,18 +75,6 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(stats["max_length"], 0)
         self.assertEqual(stats["avg_length"], 0)
 
-    def test_convert_file_format(self):
-        """Test format conversion"""
-        output_file = os.path.join(self.temp_dir.name, "converted.fasta")
-        convert_file_format(self.fastq_file, output_file)
-
-        # Check if file was created
-        self.assertTrue(os.path.exists(output_file))
-
-        # Read the converted file
-        converted_sequences = read_sequences(output_file)
-        self.assertEqual(len(converted_sequences), 2)
-
     def test_unsupported_format(self):
         """Test error on unsupported format"""
         invalid_file = os.path.join(self.temp_dir.name, "invalid.txt")
@@ -96,30 +83,6 @@ class TestUtils(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             read_sequences(invalid_file)
-
-    def test_convert_file_format_invalid_input(self):
-        """Test conversion with an unsupported input file format"""
-        invalid_input_file = os.path.join(self.temp_dir.name, "test.txt")
-        with open(invalid_input_file, "w") as f:
-            f.write("Invalid content")
-
-        invalid_output_file = os.path.join(self.temp_dir.name, "output.fasta")
-
-        # Test that it raises a ValueError for unsupported input file format
-        with self.assertRaises(ValueError):
-            convert_file_format(invalid_input_file, invalid_output_file)
-
-    def test_convert_file_format_invalid_output(self):
-        """Test conversion with an unsupported output file format"""
-        invalid_input_file = os.path.join(self.temp_dir.name, "test.fasta")
-        with open(invalid_input_file, "w") as f:
-            f.write(">seq1\nATGCTAGCTAGCT\n")
-
-        invalid_output_file = os.path.join(self.temp_dir.name, "output.txt")
-
-        # Test that it raises a ValueError for unsupported output file format
-        with self.assertRaises(ValueError):
-            convert_file_format(invalid_input_file, invalid_output_file)
 
     def test_write_sequences_invalid_output(self):
         """Test writing sequences with an unsupported output file format"""
