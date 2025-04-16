@@ -89,7 +89,7 @@ class TestCLI(unittest.TestCase):
                     "--cpus",
                     "2",
                     "--gpus",
-                    "1",
+                    "0",
                     "--threshold",
                     "0.8",
                     "--verbose",
