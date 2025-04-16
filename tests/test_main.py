@@ -8,9 +8,10 @@ import torch
 from decaf.cli import main
 
 
-@patch("transformers.AutoModel.from_pretrained")
+@patch("decaf.models.models.load_model")
 @patch("transformers.AutoTokenizer.from_pretrained")
-def test_entry_point(mock_tokenizer, mock_model, monkeypatch):
+def test_entry_point(mock_tokenizer, mock_load_model, monkeypatch):
+    # Mock tokenizer
     mock_tokenizer_instance = MagicMock()
     mock_tokenizer_instance.return_value = {
         "input_ids": torch.tensor([[1, 2, 3, 0]]),
@@ -18,7 +19,12 @@ def test_entry_point(mock_tokenizer, mock_model, monkeypatch):
     }
     mock_tokenizer.return_value = mock_tokenizer_instance
 
-    mock_model.return_value = MagicMock()
+    # Mock model and its predict method
+    mock_model_instance = MagicMock()
+    mock_model_instance.predict.return_value = [
+        {"prediction": "SomeTaxon", "score": 0.98, "sequence_id": "seq1"}
+    ]
+    mock_load_model.return_value = mock_model_instance
 
     with tempfile.NamedTemporaryFile(suffix=".fa", delete=False) as tmp_input:
         tmp_input.write(b">seq1\nAGCTAGCTAG\n")
