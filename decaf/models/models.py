@@ -124,6 +124,7 @@ class AmpliconClassifier(pl.LightningModule):
             Dictionary containing predictions and metadata:
             - sequence_ids: Original sequence identifiers
             - sequence_strs: Original sequence strings
+            - seq_qualities: Original sequence qualities
             - predictions: Class predictions
             - confidences: Confidence scores for predictions
             - probabilities: Full probability distribution over classes
@@ -148,6 +149,7 @@ class AmpliconClassifier(pl.LightningModule):
             return {
                 "sequence_ids": batch["sequence_id"],
                 "sequence_strs": batch["sequence_str"],
+                "seq_qualities": batch["seq_quality"],
                 "predictions": preds,
                 "confidences": confidences,
                 "probabilities": probs,

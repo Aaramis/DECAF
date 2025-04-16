@@ -14,8 +14,6 @@ write_sequences
     Write biological sequences to FASTQ or FASTA files.
 get_sequence_stats
     Calculate statistics for a list of sequences.
-convert_file_format
-    Convert between FASTQ and FASTA formats.
 process_predictions
     Process model predictions and write sequences to classified files.
 determine_file_format
@@ -195,53 +193,6 @@ def get_sequence_stats(sequences: List[SeqRecord]) -> Dict[str, Any]:
     }
 
 
-def convert_file_format(input_file: str, output_file: str) -> None:
-    """
-    Convert between FASTQ and FASTA formats.
-
-    Parameters
-    ----------
-    input_file : str
-        Path to the input file
-    output_file : str
-        Path to the output file
-
-    Raises
-    ------
-    ValueError
-        If the file format is not supported
-
-    Examples
-    --------
-    >>> convert_file_format("input.fastq", "output.fasta")
-    """
-    in_ext = os.path.splitext(input_file)[1].lower()
-    out_ext = os.path.splitext(output_file)[1].lower()
-
-    # Determine input format
-    if in_ext in [".fastq", ".fq"]:
-        in_format = "fastq"
-    elif in_ext in [".fasta", ".fa", ".fna"]:
-        in_format = "fasta"
-    else:
-        raise ValueError(f"Unsupported input file format: {in_ext}")
-
-    # Determine output format
-    if out_ext in [".fastq", ".fq"]:
-        out_format = "fastq"
-    elif out_ext in [".fasta", ".fa", ".fna"]:
-        out_format = "fasta"
-    else:
-        raise ValueError(f"Unsupported output file format: {out_ext}")
-
-    # Convert
-    with open(input_file, "r") as in_handle:
-        sequences = list(SeqIO.parse(in_handle, in_format))
-
-    with open(output_file, "w") as out_handle:
-        SeqIO.write(sequences, out_handle, out_format)
-
-
 def process_predictions(
     predictions: Union[List[Dict[str, Any]], List[List[Dict[str, Any]]], None],
     model_config: Dict[str, Any],
@@ -274,10 +225,7 @@ def process_predictions(
     if predictions is not None:
         # Flatten predictions if they're nested
         for batch in predictions:
-            if isinstance(batch, list):
-                processed_predictions.extend(batch)
-            else:
-                processed_predictions.append(batch)
+            processed_predictions.append(batch)
 
     format_type = determine_file_format(input_file)
     categories = get_categories_from_config(model_config)
@@ -418,11 +366,12 @@ def process_prediction_batch(
     """
     sequence_ids = batch["sequence_ids"]
     sequence_strs = batch["sequence_strs"]
+    seq_qualities = batch["seq_qualities"]
     batch_preds = batch["predictions"].cpu().numpy()
     batch_confs = batch["confidences"].cpu().numpy()
 
-    for seq_id, seq_str, pred, conf in zip(
-        sequence_ids, sequence_strs, batch_preds, batch_confs
+    for seq_id, seq_str, seq_quality, pred, conf in zip(
+        sequence_ids, sequence_strs, seq_qualities, batch_preds, batch_confs
     ):
         # Check if confidence is below threshold
         if conf < threshold:
@@ -433,6 +382,7 @@ def process_prediction_batch(
         classified_seq = create_classified_sequence(
             seq_str,
             seq_id,
+            seq_quality,
             category,
             conf,
             format_type,
@@ -443,6 +393,7 @@ def process_prediction_batch(
 def create_classified_sequence(
     original_seq: str,
     original_id: str,
+    seq_quality: str,
     category: str,
     confidence: float,
     format_type: str,
@@ -456,6 +407,8 @@ def create_classified_sequence(
         Original sequence string
     original_id : str
         Original sequence id
+    seq_quality : str
+        Original sequence quality
     category : str
         Predicted category
     confidence : float
@@ -480,8 +433,9 @@ def create_classified_sequence(
         description=f" DECAF_pred={category} DECAF_confidence={confidence:.4f}",
     )
 
-    if format_type == "fastq" and hasattr(original_seq, "letter_annotations"):
-        new_seq.letter_annotations = original_seq.letter_annotations
+    if format_type == "fastq":
+        phred_quality = [ord(char) - 33 for char in seq_quality]
+        new_seq.letter_annotations = {"phred_quality": phred_quality}
 
     return new_seq
 

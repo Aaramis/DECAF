@@ -52,6 +52,7 @@ class TestNewUtilsFunctions(unittest.TestCase):
             {
                 "sequence_ids": ["seq1", "seq2"],
                 "sequence_strs": ["ATGCTAGCTAGCT", "GCATCGATCGATCG"],
+                "seq_qualities": ["IIIIIIIIIIIII", "IIIIIIIIIIIII"],
                 "predictions": torch.tensor([0, 1]),
                 "confidences": torch.tensor([0.95, 0.87]),
             }
@@ -93,7 +94,7 @@ class TestNewUtilsFunctions(unittest.TestCase):
         """Test creating classified sequence record"""
         # Test with fasta format
         seq = create_classified_sequence(
-            "ATGCTAGCTAGCT", "seq1", "bacteria", 0.95, "fasta"
+            "ATGCTAGCTAGCT", "seq1", "IIIIIIIIIIIII", "bacteria", 0.95, "fasta"
         )
 
         self.assertEqual(seq.id, "seq1")
@@ -101,16 +102,47 @@ class TestNewUtilsFunctions(unittest.TestCase):
         self.assertIn("DECAF_pred=bacteria", seq.description)
         self.assertIn("DECAF_confidence=0.9500", seq.description)
 
-        # Test with fastq format using SeqRecord
-        original_seq = self.test_sequences[0]
-        seq = create_classified_sequence(
-            original_seq.seq, "seq1", "virus", 0.87, "fastq"
+        # Test with fastq format using SeqRecord, with letter_annotations
+        # Create a mock sequence with letter_annotations (for example, a quality score)
+        original_seq = SeqRecord(
+            seq=Seq("ATGCTAGCTAGCT"),
+            id="seq1",
+            letter_annotations={"phred_quality": [40] * 13},
         )
+
+        # Create the classified sequence
+        seq = create_classified_sequence(
+            original_seq.seq, "seq1", "IIIIIIIIIIIII", "virus", 0.87, "fastq"
+        )
+
+        print("==> Created SeqRecord:")
+        print(seq)
+        print("Sequence:", seq.seq)
+        print("ID:", seq.id)
+        print("Description:", seq.description)
+        print("Letter annotations:", seq.letter_annotations)
 
         self.assertEqual(seq.id, "seq1")
         self.assertEqual(str(seq.seq), "ATGCTAGCTAGCT")
         self.assertIn("DECAF_pred=virus", seq.description)
         self.assertIn("DECAF_confidence=0.8700", seq.description)
+
+        # Check if letter_annotations exists on seq
+        self.assertTrue(
+            hasattr(seq, "letter_annotations"), "letter_annotations not found on seq"
+        )
+
+        # If letter_annotations exist, verify if 'phred_quality' is present
+        if hasattr(seq, "letter_annotations"):
+            self.assertIn(
+                "phred_quality",
+                seq.letter_annotations,
+                "'phred_quality' not found in letter_annotations",
+            )
+            self.assertEqual(
+                seq.letter_annotations["phred_quality"],
+                original_seq.letter_annotations["phred_quality"],
+            )
 
     def test_classify_sequences(self):
         """Test sequence classification directly without mocking"""
@@ -188,6 +220,7 @@ class TestNewUtilsFunctions(unittest.TestCase):
         batch = {
             "sequence_ids": ["seq1", "seq2"],
             "sequence_strs": ["ATGCTAGCTAGCT", "GCATCGATCGATCG"],
+            "seq_qualities": ["IIIIIIIIIIIII", "IIIIIIIIIIIII"],
             "predictions": torch.tensor([0, 1]),
             "confidences": torch.tensor([0.95, 0.87]),
         }
@@ -213,6 +246,7 @@ class TestNewUtilsFunctions(unittest.TestCase):
         batch = {
             "sequence_ids": ["seq3"],
             "sequence_strs": ["ATGCATGC"],
+            "seq_qualities": ["IIIIIIII"],
             "predictions": torch.tensor([3]),  # Category 3 is not in our mapping
             "confidences": torch.tensor([0.75]),
         }
@@ -236,6 +270,7 @@ class TestNewUtilsFunctions(unittest.TestCase):
         batch = {
             "sequence_ids": ["seq1", "seq2", "seq3"],
             "sequence_strs": ["ATGCTAGCTAGCT", "GCATCGATCGATCG", "ATATAGCGCGCTAT"],
+            "seq_qualities": ["IIIIIIIIIIIII", "IIIIIIIIIIIII", "IIIIIIIIIIIII"],
             "predictions": torch.tensor([0, 1, 2]),
             "confidences": torch.tensor([0.95, 0.6, 0.3]),
         }
@@ -295,6 +330,7 @@ class TestNewUtilsFunctions(unittest.TestCase):
             {
                 "sequence_ids": ["seq1", "seq2", "seq3"],
                 "sequence_strs": ["ATGCTAGCTAGCT", "GCATCGATCGATCG", "ATATAGCGCGCTAT"],
+                "seq_qualities": ["IIIIIIIIIIIII", "IIIIIIIIIIIII", "IIIIIIIIIIIII"],
                 "predictions": torch.tensor([0, 1, 2]),
                 "confidences": torch.tensor([0.95, 0.6, 0.3]),
             }
@@ -330,10 +366,10 @@ class TestNewUtilsFunctions(unittest.TestCase):
         """Test writing classified sequences to files"""
         # Create test classified sequences
         bacteria_seq = create_classified_sequence(
-            "ATGCTAGCT", "seq1", "bacteria", 0.95, "fasta"
+            "ATGCTAGCT", "seq1", "IIIIIIIIIIIII", "bacteria", 0.95, "fasta"
         )
         virus_seq = create_classified_sequence(
-            "GCATCGATC", "seq2", "virus", 0.87, "fasta"
+            "GCATCGATC", "seq2", "IIIIIIIIIIIII", "virus", 0.87, "fasta"
         )
 
         classified_seqs = {

@@ -103,6 +103,7 @@ class TestAmpliconClassifier(unittest.TestCase):
         batch = {
             "input_ids": torch.tensor([[1, 2, 3], [4, 5, 6]]),
             "attention_mask": torch.tensor([[1, 1, 1], [1, 1, 1]]),
+            "seq_quality": ["IIII", "IIII"],
             "sequence_id": ["seq1", "seq2"],
             "sequence_str": ["ATCG", "GCTA"],
         }
