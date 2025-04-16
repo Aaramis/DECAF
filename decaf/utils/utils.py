@@ -225,7 +225,10 @@ def process_predictions(
     if predictions is not None:
         # Flatten predictions if they're nested
         for batch in predictions:
-            processed_predictions.append(batch)
+            if isinstance(batch, list):
+                processed_predictions.extend(batch)
+            else:
+                processed_predictions.append(batch)
 
     format_type = determine_file_format(input_file)
     categories = get_categories_from_config(model_config)
