@@ -1,10 +1,11 @@
 import os
 import sys
 import tempfile
+from unittest.mock import MagicMock, patch
+
 import torch
 
 from decaf.cli import main
-from unittest.mock import MagicMock, patch
 
 
 @patch("transformers.AutoModel.from_pretrained")
@@ -13,7 +14,7 @@ def test_entry_point(mock_tokenizer, mock_model, monkeypatch):
     mock_tokenizer_instance = MagicMock()
     mock_tokenizer_instance.return_value = {
         "input_ids": torch.tensor([[1, 2, 3, 0]]),
-        "attention_mask": torch.tensor([[1, 1, 1, 0]])
+        "attention_mask": torch.tensor([[1, 1, 1, 0]]),
     }
     mock_tokenizer.return_value = mock_tokenizer_instance
 
