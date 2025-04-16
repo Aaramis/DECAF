@@ -1,9 +1,11 @@
 import os
+import tempfile
 import unittest
 from unittest.mock import patch
+
 from click.testing import CliRunner
+
 from decaf.cli import main
-import tempfile
 
 
 class TestCLI(unittest.TestCase):

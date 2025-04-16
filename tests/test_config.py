@@ -1,6 +1,7 @@
 import json
 import unittest
 from unittest.mock import mock_open, patch
+
 from decaf.config import get_model_config, load_config, save_config
 
 
