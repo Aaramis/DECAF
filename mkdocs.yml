@@ -1,51 +1,77 @@
-site_name: DECAF Documentation
-site_description: Documentation for the DNA Environmental Contaminant Analysis Framework
-site_author: Auguste Gardette
-repo_url: https://github.com/Aaramis/DECAF
-repo_name: Aaramis/DECAF
+site_name: DECAF
+site_description: Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences
+site_author: DECAF Team
+site_url: https://decaf.readthedocs.io
 
 theme:
-  name: mkdocs
-  palette:
-    primary: indigo
-    accent: green
+  name: readthedocs
   features:
+    - navigation.instant
     - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - search.suggest
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
     - search.highlight
+    - search.share
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Aaramis/DECAF
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/decaf/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/decaf_bio
 
 markdown_extensions:
-  - pymdownx.highlight
-  - pymdownx.superfences
-  - pymdownx.inlinehilite
-  - pymdownx.tabbed
-  - pymdownx.critic
-  - pymdownx.tasklist:
-      custom_checkbox: true
   - admonition
+  - codehilite:
+      guess_lang: false
+      use_pygments: true
+      linenums: true
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed
   - toc:
       permalink: true
 
 nav:
-  - Accueil: index.md
-  # - Installation: installation.md
-  # - Guide de démarrage: getting-started.md
-  # - Guides:
-  #   - Traitement des séquences: guides/sequence-processing.md
-  #   - Entraînement des modèles: guides/model-training.md
-  # - Référence API: 
-  #   - Vue d'ensemble: api/index.md
-  #   - Module principal: api/core.md
-  #   - Modèles: api/models.md
-  #   - Utilitaires: api/utils.md
+  - Introduction: introduction.md
+  - Installation: installation.md
+  - Usage:
+    - Quick Start: usage/quick-start.md
+    - Advanced Usage: usage/advanced.md
+    - Command Reference: usage/commands.md
+  - Configuration:
+    - Basic Configuration: configuration/basic.md
+    - Advanced Configuration: configuration/advanced.md
+  - API:
+    - API Reference: api/index.md
+    - Models: api/models.md
+    - Data Processing: api/data.md
+    - Utilities: api/utils.md
+  - Development:
+    - Contributing: contributing.md
+    - Testing: testing.md
+    - Development Guide: development.md
+  - About:
+    - License: about/license.md
+    - Changelog: about/changelog.md
+    - FAQ: about/faq.md
+    - Contributing Guidelines: about/contributing.md
   - Contribuer:
-    # - Guide de contribution: contributing/index.md
     - Standards de codage: contributing/coding-standards.md
     - Conventions de nommage: contributing/naming-conventions.md
     - Templates de documentation: contributing/documentation-templates.md
-  # - Développement:
   #   - Planning: development/roadmap.md
   #   - Journal des modifications: development/changelog.md
 
