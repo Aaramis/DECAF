@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="DECAF Team" /><link rel="canonical" href="https://decaf.readthedocs.io/configuration/basic/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Basic Configuration - DECAF</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Basic Configuration";
+        var mkdocs_page_input_path = "configuration/basic.md";
+        var mkdocs_page_url = "/configuration/basic/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> DECAF
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../introduction/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/quick-start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/advanced.md">Advanced Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/commands.md">Command Reference</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Basic Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#structure-des-fichiers-de-configuration">Structure des Fichiers de Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parametres-du-modele">Paramètres du Modèle</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parametres-dentrainement">Paramètres d'Entraînement</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parametres-de-donnees">Paramètres de Données</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parametres-systeme">Paramètres Système</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exemple-de-configuration-complete">Exemple de Configuration Complète</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bonnes-pratiques">Bonnes Pratiques</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#depannage">Dépannage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#problemes-communs">Problèmes Communs</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../advanced.md">Advanced Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../api/index.md">API Reference</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api/models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/data.md">Data Processing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/utils.md">Utilities</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../contributing.md">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../testing.md">Testing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../development.md">Development Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">About</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../about/license.md">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/changelog.md">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/faq.md">FAQ</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/contributing.md">Contributing Guidelines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contribuer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/coding-standards/">Standards de codage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/naming-conventions/">Conventions de nommage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/documentation-templates/">Templates de documentation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">DECAF</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">Basic Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="configuration-de-base">Configuration de Base<a class="headerlink" href="#configuration-de-base" title="Permanent link">&para;</a></h1>
+<h2 id="structure-des-fichiers-de-configuration">Structure des Fichiers de Configuration<a class="headerlink" href="#structure-des-fichiers-de-configuration" title="Permanent link">&para;</a></h2>
+<p>Les fichiers de configuration de DECAF utilisent le format YAML. Voici la structure de base :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configuration du modèle</span>
+<span class="nt">model</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">its_plant</span>
+<span class="w">  </span><span class="nt">hidden_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">768</span>
+<span class="w">  </span><span class="nt">num_labels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">dropout_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+
+<span class="c1"># Paramètres d&#39;entraînement</span>
+<span class="nt">training</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32</span>
+<span class="w">  </span><span class="nt">learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5e-5</span>
+<span class="w">  </span><span class="nt">epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">  </span><span class="nt">patience</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="c1"># Paramètres de données</span>
+<span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">max_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150</span>
+<span class="w">  </span><span class="nt">num_workers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">input_format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fasta</span>
+
+<span class="c1"># Paramètres système</span>
+<span class="nt">system</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">use_gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">num_gpus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">num_nodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+</code></pre></div>
+<h2 id="parametres-du-modele">Paramètres du Modèle<a class="headerlink" href="#parametres-du-modele" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Description</th>
+<th>Valeur par défaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Nom du modèle</td>
+<td><code>its_plant</code></td>
+</tr>
+<tr>
+<td><code>hidden_size</code></td>
+<td>Taille des vecteurs cachés</td>
+<td><code>768</code></td>
+</tr>
+<tr>
+<td><code>num_labels</code></td>
+<td>Nombre de classes</td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><code>dropout_rate</code></td>
+<td>Taux de dropout</td>
+<td><code>0.1</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="parametres-dentrainement">Paramètres d'Entraînement<a class="headerlink" href="#parametres-dentrainement" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Description</th>
+<th>Valeur par défaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_size</code></td>
+<td>Taille des lots</td>
+<td><code>32</code></td>
+</tr>
+<tr>
+<td><code>learning_rate</code></td>
+<td>Taux d'apprentissage</td>
+<td><code>5e-5</code></td>
+</tr>
+<tr>
+<td><code>epochs</code></td>
+<td>Nombre d'époques</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>patience</code></td>
+<td>Patience pour early stopping</td>
+<td><code>3</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="parametres-de-donnees">Paramètres de Données<a class="headerlink" href="#parametres-de-donnees" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Description</th>
+<th>Valeur par défaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_length</code></td>
+<td>Longueur maximale des séquences</td>
+<td><code>150</code></td>
+</tr>
+<tr>
+<td><code>num_workers</code></td>
+<td>Nombre de workers pour le chargement</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td><code>input_format</code></td>
+<td>Format des données d'entrée</td>
+<td><code>fasta</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="parametres-systeme">Paramètres Système<a class="headerlink" href="#parametres-systeme" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Description</th>
+<th>Valeur par défaut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>use_gpu</code></td>
+<td>Utiliser le GPU</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>num_gpus</code></td>
+<td>Nombre de GPUs</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>num_nodes</code></td>
+<td>Nombre de nœuds</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>Seed pour la reproductibilité</td>
+<td><code>42</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="exemple-de-configuration-complete">Exemple de Configuration Complète<a class="headerlink" href="#exemple-de-configuration-complete" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nt">model</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">its_plant</span>
+<span class="w">  </span><span class="nt">hidden_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">768</span>
+<span class="w">  </span><span class="nt">num_labels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">dropout_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+
+<span class="nt">training</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">64</span>
+<span class="w">  </span><span class="nt">learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5e-5</span>
+<span class="w">  </span><span class="nt">epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">patience</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+
+
+
+
+
+<span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">max_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<span class="w">  </span><span class="nt">num_workers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">input_format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fasta</span>
+
+<span class="nt">system</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">use_gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">num_gpus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">num_nodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+</code></pre></div>
+<h2 id="bonnes-pratiques">Bonnes Pratiques<a class="headerlink" href="#bonnes-pratiques" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Organisation des Fichiers</strong></li>
+<li>Séparer les configurations par type d'analyse</li>
+<li>Maintenir une configuration de référence</li>
+<li>
+<p>Documenter les changements majeurs</p>
+</li>
+<li>
+<p><strong>Gestion des Versions</strong></p>
+</li>
+<li>Versionner les fichiers de configuration</li>
+<li>Maintenir un historique des modifications</li>
+<li>
+<p>Tester chaque nouvelle configuration</p>
+</li>
+<li>
+<p><strong>Optimisation des Performances</strong></p>
+</li>
+<li>Adapter <code>batch_size</code> selon la mémoire GPU</li>
+<li>Optimiser <code>num_workers</code> selon le nombre de cœurs</li>
+<li>Ajuster <code>max_length</code> selon les données d'entrée</li>
+</ol>
+<h2 id="depannage">Dépannage<a class="headerlink" href="#depannage" title="Permanent link">&para;</a></h2>
+<h3 id="problemes-communs">Problèmes Communs<a class="headerlink" href="#problemes-communs" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Mémoire Insuffisante</strong></li>
+<li>Réduire <code>batch_size</code></li>
+<li>Désactiver <code>use_gpu</code></li>
+<li>
+<p>Augmenter <code>num_workers</code></p>
+</li>
+<li>
+<p><strong>Performance Lente</strong></p>
+</li>
+<li>Augmenter <code>num_workers</code></li>
+<li>Optimiser <code>max_length</code></li>
+<li>
+<p>Vérifier la configuration GPU</p>
+</li>
+<li>
+<p><strong>Problèmes de Format</strong></p>
+</li>
+<li>Vérifier <code>input_format</code></li>
+<li>Valider les séquences d'entrée</li>
+<li>Vérifier la longueur maximale</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../usage/quick-start/" class="btn btn-neutral float-left" title="Quick Start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../api/models/" class="btn btn-neutral float-right" title="Models">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../usage/quick-start/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../api/models/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

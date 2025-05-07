@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="DECAF Team" /><link rel="canonical" href="https://decaf.readthedocs.io/contributing/naming-conventions/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Conventions de nommage - DECAF</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Conventions de nommage";
+        var mkdocs_page_input_path = "contributing/naming-conventions.md";
+        var mkdocs_page_url = "/contributing/naming-conventions/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> DECAF
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../introduction/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/quick-start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/advanced.md">Advanced Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/commands.md">Command Reference</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/basic/">Basic Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../configuration/advanced.md">Advanced Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../api/index.md">API Reference</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api/models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/data.md">Data Processing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/utils.md">Utilities</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../contributing.md">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../testing.md">Testing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../development.md">Development Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">About</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../about/license.md">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/changelog.md">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/faq.md">FAQ</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/contributing.md">Contributing Guidelines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contribuer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../coding-standards/">Standards de codage</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Conventions de nommage</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#principes-generaux">Principes généraux</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modules-et-packages">Modules et packages</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#classes">Classes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fonctions-et-methodes">Fonctions et méthodes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#variables-et-attributs">Variables et attributs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constantes">Constantes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arguments-de-fonctions">Arguments de fonctions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#iterateurs-et-boucles">Itérateurs et boucles</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fichiers">Fichiers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tables-de-base-de-donnees-et-champs">Tables de base de données et champs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#types-generiques-et-typehints">Types génériques et TypeHints</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../documentation-templates/">Templates de documentation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">DECAF</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Contribuer</li>
+      <li class="breadcrumb-item active">Conventions de nommage</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="conventions-de-nommage-pour-decaf">Conventions de nommage pour DECAF<a class="headerlink" href="#conventions-de-nommage-pour-decaf" title="Permanent link">&para;</a></h1>
+<p>Ce document définit les conventions de nommage à suivre pour le projet DECAF.</p>
+<h2 id="principes-generaux">Principes généraux<a class="headerlink" href="#principes-generaux" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Les noms doivent être descriptifs et explicites.</li>
+<li>Préférer des noms longs et clairs à des noms courts et ambigus.</li>
+<li>Éviter les abréviations sauf si elles sont standard dans le domaine (ex: DNA, RNA, ITS).</li>
+<li>Utiliser l'anglais pour tous les noms.</li>
+</ul>
+<h2 id="modules-et-packages">Modules et packages<a class="headerlink" href="#modules-et-packages" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Noms en minuscules.</li>
+<li>Mots séparés par des underscores si nécessaire.</li>
+<li>Noms courts mais descriptifs.</li>
+<li>Éviter les caractères spéciaux et les chiffres.</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>preprocessing</code>
+- <code>model_training</code>
+- <code>data_loaders</code>
+- <code>visualization</code></p>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser le format CamelCase (chaque mot commence par une majuscule).</li>
+<li>Les noms doivent être des substantifs ou des groupes nominaux.</li>
+<li>Suffixe spécifique pour certains types de classes:</li>
+<li><code>*Error</code> ou <code>*Exception</code> pour les exceptions</li>
+<li><code>*Manager</code> pour les classes de gestion</li>
+<li><code>*Factory</code> pour les classes factory</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>SequenceProcessor</code>
+- <code>ModelTrainer</code>
+- <code>DataLoader</code>
+- <code>ConfigManager</code>
+- <code>SequenceQualityError</code></p>
+<h2 id="fonctions-et-methodes">Fonctions et méthodes<a class="headerlink" href="#fonctions-et-methodes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser le format snake_case (minuscules avec underscores).</li>
+<li>Utiliser des verbes ou phrases verbales.</li>
+<li>Nom descriptif du comportement.</li>
+<li>Méthodes privées préfixées par un underscore (<code>_</code>).</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>clean_sequence()</code>
+- <code>train_model()</code>
+- <code>calculate_similarity_score()</code>
+- <code>_validate_input()</code></p>
+<h2 id="variables-et-attributs">Variables et attributs<a class="headerlink" href="#variables-et-attributs" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser le format snake_case.</li>
+<li>Nom précis et descriptif du contenu.</li>
+<li>Attributs privés préfixés par un underscore (<code>_</code>).</li>
+<li>Éviter les noms d'une seule lettre sauf pour les compteurs.</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>sequence_data</code>
+- <code>model_parameters</code>
+- <code>gc_content</code>
+- <code>_internal_state</code></p>
+<h2 id="constantes">Constantes<a class="headerlink" href="#constantes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Tout en MAJUSCULES avec underscores.</li>
+<li>Définies au niveau du module.</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>MAX_SEQUENCE_LENGTH</code>
+- <code>DEFAULT_QUALITY_THRESHOLD</code>
+- <code>DNA_BASES</code></p>
+<h2 id="arguments-de-fonctions">Arguments de fonctions<a class="headerlink" href="#arguments-de-fonctions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser le format snake_case.</li>
+<li>Être cohérent avec les noms des variables.</li>
+<li>Pour les booléens, utiliser des préfixes tels que <code>is_</code>, <code>has_</code>, <code>should_</code>.</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>def process_sequence(sequence_data, is_quality_filtered=True):</code></p>
+<h2 id="iterateurs-et-boucles">Itérateurs et boucles<a class="headerlink" href="#iterateurs-et-boucles" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Pour les itérateurs courts ou les indices, des noms courts sont acceptables.</li>
+<li>Si l'objet a une signification spécifique, utiliser un nom plus descriptif.</li>
+</ul>
+<p><strong>Exemples:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Court et simple</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># Plus descriptif</span>
+<span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">:</span>
+    <span class="n">process_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+
+<span class="c1"># Avec index et valeur</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">base</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">is_valid_base</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
+        <span class="n">valid_bases</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">base</span>
+</code></pre></div></p>
+<h2 id="fichiers">Fichiers<a class="headerlink" href="#fichiers" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Noms en minuscules.</li>
+<li>Mots séparés par des underscores.</li>
+<li>Extensions appropriées (.py, .md, .txt, etc.).</li>
+<li>Les noms de fichiers de test doivent commencer par <code>test_</code>.</li>
+</ul>
+<p><strong>Exemples:</strong>
+- <code>sequence_processor.py</code>
+- <code>model_training.py</code>
+- <code>test_sequence_processor.py</code></p>
+<h2 id="tables-de-base-de-donnees-et-champs">Tables de base de données et champs<a class="headerlink" href="#tables-de-base-de-donnees-et-champs" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Tables au pluriel, en snake_case.</li>
+<li>Champs en snake_case.</li>
+<li>Clé primaire nommée <code>id</code>.</li>
+<li>Clés étrangères nommées <code>*_id</code>.</li>
+</ul>
+<p><strong>Exemples:</strong>
+- Table: <code>sequences</code>, Champs: <code>id</code>, <code>sequence_data</code>, <code>quality_score</code>
+- Table: <code>taxonomies</code>, Champs: <code>id</code>, <code>sequence_id</code>, <code>taxon_name</code></p>
+<h2 id="types-generiques-et-typehints">Types génériques et TypeHints<a class="headerlink" href="#types-generiques-et-typehints" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser CamelCase pour les types génériques personnalisés.</li>
+<li>Suivre les conventions de la bibliothèque standard pour les annotations de type.</li>
+</ul>
+<p><strong>Exemples:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="n">SequenceData</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span>
+<span class="n">TaxonomyTree</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_sequences</span><span class="p">(</span><span class="n">sequences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SequenceData</span><span class="p">]:</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../coding-standards/" class="btn btn-neutral float-left" title="Standards de codage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../documentation-templates/" class="btn btn-neutral float-right" title="Templates de documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../coding-standards/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../documentation-templates/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

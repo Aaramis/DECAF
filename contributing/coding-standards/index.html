@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="DECAF Team" /><link rel="canonical" href="https://decaf.readthedocs.io/contributing/coding-standards/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Standards de codage - DECAF</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Standards de codage";
+        var mkdocs_page_input_path = "contributing/coding-standards.md";
+        var mkdocs_page_url = "/contributing/coding-standards/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> DECAF
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../introduction/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/quick-start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/advanced.md">Advanced Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/commands.md">Command Reference</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/basic/">Basic Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../configuration/advanced.md">Advanced Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../api/index.md">API Reference</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api/models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/data.md">Data Processing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/utils.md">Utilities</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../contributing.md">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../testing.md">Testing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../development.md">Development Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">About</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../about/license.md">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/changelog.md">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/faq.md">FAQ</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/contributing.md">Contributing Guidelines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contribuer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Standards de codage</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#style-de-code-general">Style de code général</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#structure-des-fichiers">Structure des fichiers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#longueur-des-lignes-et-indentation">Longueur des lignes et indentation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nommage">Nommage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#docstrings">Docstrings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gestion-des-erreurs">Gestion des erreurs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests-unitaires">Tests unitaires</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#validation-du-code">Validation du code</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-conventions/">Conventions de nommage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../documentation-templates/">Templates de documentation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">DECAF</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Contribuer</li>
+      <li class="breadcrumb-item active">Standards de codage</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="standards-de-codage-pour-decaf">Standards de codage pour DECAF<a class="headerlink" href="#standards-de-codage-pour-decaf" title="Permanent link">&para;</a></h1>
+<p>Ce document définit les normes de codage à suivre pour le projet DECAF.</p>
+<h2 id="style-de-code-general">Style de code général<a class="headerlink" href="#style-de-code-general" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Suivre la norme <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> pour le style de code Python.</li>
+<li>Utiliser <a href="https://black.readthedocs.io/">Black</a> avec les paramètres par défaut pour le formatage automatique du code.</li>
+<li>Utiliser <a href="https://pycqa.github.io/isort/">isort</a> pour organiser les imports.</li>
+<li>Utiliser <a href="https://flake8.pycqa.org/">flake8</a> pour la vérification statique du code.</li>
+</ul>
+<h2 id="structure-des-fichiers">Structure des fichiers<a class="headerlink" href="#structure-des-fichiers" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Chaque module doit avoir un fichier <code>__init__.py</code>.</li>
+<li>Les fichiers de test doivent être nommés <code>test_*.py</code> et placés dans le répertoire <code>tests/</code>.</li>
+<li>Les scripts exécutables doivent être placés dans le répertoire <code>decaf/</code>.</li>
+</ul>
+<h2 id="longueur-des-lignes-et-indentation">Longueur des lignes et indentation<a class="headerlink" href="#longueur-des-lignes-et-indentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Limite de 88 caractères par ligne (norme Black).</li>
+<li>Utiliser 4 espaces pour l'indentation (pas de tabulations).</li>
+<li>Les commentaires de ligne doivent être limités à 72 caractères.</li>
+</ul>
+<h2 id="nommage">Nommage<a class="headerlink" href="#nommage" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Classes: Utiliser le format CamelCase (<code>class ModelTrainer:</code>).</li>
+<li>Fonctions et variables: Utiliser le format snake_case (<code>def process_sequence():</code>, <code>sequence_data = ...</code>).</li>
+<li>Constantes: Utiliser des majuscules avec underscore (<code>MAX_SEQUENCE_LENGTH = 1000</code>).</li>
+<li>Modules: Utiliser des noms courts, tout en minuscules (<code>utils.py</code>, <code>preprocessing.py</code>).</li>
+<li>Éviter les noms de variables d'une seule lettre, sauf pour les compteurs ou les itérateurs.</li>
+</ul>
+<h2 id="docstrings">Docstrings<a class="headerlink" href="#docstrings" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Toutes les fonctions, classes et méthodes publiques doivent avoir des docstrings.</li>
+<li>Utiliser le format <a href="https://numpydoc.readthedocs.io/en/latest/format.html">NumPy/SciPy</a> pour les docstrings.</li>
+<li>Exemple de docstring pour une fonction:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">align_sequences</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;global&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Aligne deux séquences biologiques.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    seq1 : str</span>
+<span class="sd">        Première séquence à aligner</span>
+<span class="sd">    seq2 : str</span>
+<span class="sd">        Deuxième séquence à aligner</span>
+<span class="sd">    method : {&#39;global&#39;, &#39;local&#39;, &#39;semi-global&#39;}, default=&#39;global&#39;</span>
+<span class="sd">        Méthode d&#39;alignement à utiliser</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple</span>
+<span class="sd">        Un tuple contenant les séquences alignées (str, str) et le score (float)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; align_sequences(&quot;ACGT&quot;, &quot;ACT&quot;)</span>
+<span class="sd">    (&#39;ACGT&#39;, &#39;AC-T&#39;, 2.5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<h2 id="commentaires">Commentaires<a class="headerlink" href="#commentaires" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Les commentaires doivent expliquer le "pourquoi", pas le "comment".</li>
+<li>Pour les sections complexes, ajouter des commentaires expliquant la logique.</li>
+<li>Les commentaires TODO doivent inclure un identifiant de la personne responsable:
+  <div class="highlight"><pre><span></span><code><span class="c1"># TODO(@username): Implémenter la fonction de normalisation</span>
+</code></pre></div></li>
+</ul>
+<h2 id="gestion-des-erreurs">Gestion des erreurs<a class="headerlink" href="#gestion-des-erreurs" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Utiliser des exceptions spécifiques, pas des exceptions génériques.</li>
+<li>Définir des exceptions personnalisées dans un module <code>exceptions.py</code>.</li>
+<li>Les messages d'erreur doivent être informatifs et suggérer des solutions.</li>
+</ul>
+<h2 id="tests-unitaires">Tests unitaires<a class="headerlink" href="#tests-unitaires" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Chaque fonction doit avoir au moins un test associé.</li>
+<li>Utiliser pytest comme framework de test.</li>
+<li>Les tests doivent être indépendants les uns des autres.</li>
+<li>Les tests doivent vérifier les cas normaux et les cas limites.</li>
+</ul>
+<h2 id="validation-du-code">Validation du code<a class="headerlink" href="#validation-du-code" title="Permanent link">&para;</a></h2>
+<p>Avant chaque commit, assurez-vous que:
+1. Tous les tests passent (<code>pytest</code>)
+2. Le code est correctement formaté (<code>black .</code> et <code>isort .</code>)
+3. Aucun avertissement n'est signalé par flake8 (<code>flake8</code>)</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../api/models/" class="btn btn-neutral float-left" title="Models"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../naming-conventions/" class="btn btn-neutral float-right" title="Conventions de nommage">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../api/models/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../naming-conventions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
