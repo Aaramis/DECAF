@@ -1,124 +1,148 @@
-![Codecov](https://codecov.io/gh/Aaramis/DECAF/branch/main/graph/badge.svg)
-![Version](https://img.shields.io/github/v/release/votre-username/DECAF)
-![Tests](https://github.com/Aaramis/DECAF/actions/workflows/test-workflow.yml/badge.svg)
+![DECAF](https://raw.githubusercontent.com/Aaramis/DECAF/main/docs/source/images/decaf_logo.png)
 
-# DECAF: DNA Environmental Contaminant Analysis Framework
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![PyPI version](https://badge.fury.io/py/decaf.svg)](https://pypi.org/project/decaf/)
+[![Documentation Status](https://readthedocs.org/projects/decaf/badge/?version=latest)](https://decaf.readthedocs.io/en/latest/?badge=latest)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-<!-- Optional Badges -->
-<!-- ![GitHub issues](https://img.shields.io/github/issues/Aaramis/DECAF) -->
-<!-- ![GitHub forks](https://img.shields.io/github/forks/Aaramis/DECAF) -->
-<!-- ![GitHub stars](https://img.shields.io/github/stars/Aaramis/DECAF) -->
-<!-- ![GitHub license](https://img.shields.io/github/license/Aaramis/DECAF) -->
-<!-- ![Documentation Status](https://readthedocs.org/projects/decaf/badge/?version=latest) -->
+# DECAF: Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences
 
-DECAF is a bioinformatics tool designed for the classification and decontamination of plant Internal Transcribed Spacer (ITS) DNA sequences. Leveraging deep learning models, DECAF accurately identifies and filters out contaminants from environmental samples, improving the reliability of downstream analyses.
+DECAF (Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences) est un framework bioinformatique moderne conçu pour l'analyse et la décontamination de séquences d'ADN environnementales. Il utilise des modèles d'apprentissage profond pour améliorer la fiabilité des analyses génomiques environnementales.
 
-## Key Features
+## 📋 Description
 
-- **Plant ITS Sequence Classification:** Accurately classifies ITS sequences belonging to plants.
-- **Contaminant Detection & Filtering:** Identifies and removes non-target sequences.
-- **Supports Common Formats:** Works with FASTQ and FASTA file formats.
-- **Command-Line Interface:** Easy to integrate into bioinformatics pipelines.
-- **Modular Design:** Built with a modular architecture, allowing for potential future extensions to other genetic markers and taxa.
+DECAF offre une solution complète pour :
+- La classification de séquences d'ADN ITS (Internal Transcribed Spacer)
+- La détection et la filtration des contaminants
+- L'analyse de séquences environnementales à grande échelle
+- L'intégration dans des pipelines bioinformatiques existants
 
-## Prerequisites
+## 🚀 Caractéristiques Principales
 
-- Python 3.x
+- **Classification Avancée**
+  - Modèles de deep learning optimisés pour l'ADN
+  - Support des formats FASTQ et FASTA
+  - Interface en ligne de commande intuitive
 
-## Installation
+- **Gestion des Contaminants**
+  - Détection précise des séquences non-cibles
+  - Filtrage automatique des contaminants
+  - Rapports détaillés d'analyse
 
-1. **Clone the Repository (Optional):**
-   ```bash
-   git clone https://github.com/Aaramis/DECAF.git
-   cd DECAF
-   ```
+- **Performance et Scalabilité**
+  - Optimisé pour le traitement par lots
+  - Support GPU via PyTorch
+  - Architecture modulaire extensible
 
-2. **Create a Virtual Environment:**
-   It's highly recommended to use a virtual environment to manage dependencies.
+- **Documentation Complète**
+  - Guide d'utilisation détaillé
+  - Exemples de cas d'utilisation
+  - API documentation
 
-   - On Windows:
-     ```bash
-     python -m venv decaf-env
-     decaf-env\Scripts\activate
-     ```
-   - On macOS and Linux:
-     ```bash
-     python -m venv decaf-env
-     source decaf-env/bin/activate
-     ```
+## 📦 Installation
 
-3. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Prérequis
 
-## Quick Start
+- Python 3.8 ou supérieur
+- Git
+- Une carte graphique NVIDIA (recommandé pour le traitement rapide)
 
-Basic usage instructions will be added here soon. This will include examples like:
+### Installation via PyPI
 
 ```bash
-# Example command structure (TO BE UPDATED)
-# decaf process --input your_sequences.fastq --output cleaned_sequences.fastq --model its_plant_model
+pip install decaf
 ```
 
-For detailed usage instructions, please refer to the full documentation.
+### Installation depuis le code source
 
-## Documentation
+1. Cloner le dépôt :
+```bash
+git clone https://github.com/Aaramis/DECAF.git
+cd DECAF
+```
 
-Comprehensive documentation for DECAF is available at:
-https://Aaramis.github.io/DECAF/
+2. Créer un environnement virtuel :
+```bash
+python -m venv decaf-env
+source decaf-env/bin/activate  # Sur Linux/Mac
+# decaf-env\Scripts\activate  # Sur Windows
+```
 
-To build and view the documentation locally:
+3. Installer les dépendances :
+```bash
+pip install -r requirements.txt
+```
 
-1. Ensure you have installed the development dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   (You might want a separate requirements-dev.txt for docs and testing tools)
-
-2. Serve the documentation:
-   ```bash
-   mkdocs serve
-   ```
-   Then open your browser to http://127.0.0.1:8000.
-
-## Development Status
-
-This project is currently in the initial development phase. Feedback and contributions are welcome!
-
-## Contributing
-
-We welcome contributions to DECAF! Please feel free to:
-
-- Report bugs or suggest features by opening an issue.
-- Contribute code by submitting a pull request.
-
-Before submitting a pull request, please ensure your code adheres to the project's coding style. We use black for code formatting. You can check your code with:
+## 🏃‍♂️ Utilisation Rapide
 
 ```bash
-pip install black  # If you haven't already
+decaf analyze --input data/sequences.fasta --output results/ --model its_plant
+```
+
+Pour plus d'options et d'exemples, consultez la documentation complète.
+
+## 📚 Documentation
+
+La documentation complète est disponible sur :
+[https://decaf.readthedocs.io](https://decaf.readthedocs.io)
+
+Pour générer la documentation localement :
+
+1. Installer les dépendances de développement :
+```bash
+pip install -r requirements.txt
+```
+
+2. Lancer le serveur de documentation :
+```bash
+mkdocs serve
+```
+
+Puis ouvrir votre navigateur à l'adresse : http://127.0.0.1:8000
+
+## 🤝 Contribuer
+
+Nous accueillons avec plaisir les contributions à DECAF !
+
+1. Ouvrez une issue pour signaler des bugs ou proposer des fonctionnalités
+2. Créez une pull request pour contribuer du code
+3. Suivez les directives de style de code
+
+Pour vérifier le style de votre code :
+```bash
+pip install black
 black --check .
 ```
 
-And format it with:
-
+Pour formater votre code :
 ```bash
 black .
 ```
 
-More detailed contribution guidelines will be added soon.
+## 🏗️ Structure du Projet
 
-## Contributors
+```
+DECAF/
+├── decaf/                 # Code source principal
+│   ├── models/           # Implémentation des modèles
+│   ├── data/             # Gestion des données
+│   └── utils/            # Fonctions utilitaires
+├── tests/                # Tests unitaires et d'intégration
+├── docs/                 # Documentation
+├── config/               # Fichiers de configuration
+└── data/                 # Données d'exemple
+```
 
-- [Auguste_GARDETTE](https://github.com/Aaramis)
-- Feel free to add yourself here when you contribute!
+## 📜 Licence
 
-## License
+DECAF est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+## 🙏 Remerciements
 
+- [Auguste_GARDETTE](https://github.com/Aaramis) - Développeur principal
+- [Contributors](https://github.com/Aaramis/DECAF/graphs/contributors) - Tous les contributeurs
 
+## 📞 Support
 
-
-<!-- decaf -b ITS -t plants -i data/test.fasta  -o output -->
-<!-- coverage run -m pytest -->
+Pour toute question ou problème, veuillez ouvrir une issue sur GitHub ou contacter l'équipe de développement.
