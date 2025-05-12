@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="DECAF Team" /><link rel="canonical" href="https://decaf.readthedocs.io/configuration/basic/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Basic Configuration - DECAF</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Basic Configuration";
+        var mkdocs_page_input_path = "configuration/basic.md";
+        var mkdocs_page_url = "/configuration/basic/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> DECAF
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../introduction/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../usage/quick-start/">Quick Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/advanced.md">Advanced Usage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../usage/commands.md">Command Reference</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Basic Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-file-structure">Configuration File Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-fields">Configuration Fields</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#model-configuration">Model Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preprocessing-parameters">Preprocessing Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#training-parameters">Training Parameters</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#system-configuration">System Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#complete-configuration-example">Complete Configuration Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../advanced.md">Advanced Configuration</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../api/index.md">API Reference</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api/models/">Models</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/data.md">Data Processing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/utils.md">Utilities</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../contributing.md">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../testing.md">Testing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../development.md">Development Guide</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">About</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../about/license.md">License</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/changelog.md">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/faq.md">FAQ</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../about/contributing.md">Contributing Guidelines</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Contribuer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/coding-standards/">Standards de codage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/naming-conventions/">Conventions de nommage</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../contributing/documentation-templates/">Templates de documentation</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">DECAF</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">Basic Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">&para;</a></h1>
+<h2 id="configuration-file-structure">Configuration File Structure<a class="headerlink" href="#configuration-file-structure" title="Permanent link">&para;</a></h2>
+<p>DECAF configuration files use the JSON format. Here is the basic structure :</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITS_Plant&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;barcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITS&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;taxa&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plants&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plants&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;contaminations&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;model_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;models/ITS_Plant&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;preprocessing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;truncation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;padding&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;max_length&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;training&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;batch_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;learning_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2e-5</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;epochs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<h2 id="configuration-fields">Configuration Fields<a class="headerlink" href="#configuration-fields" title="Permanent link">&para;</a></h2>
+<h3 id="model-configuration">Model Configuration<a class="headerlink" href="#model-configuration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model_name</code></td>
+<td>Name of the model</td>
+<td><code>ITS_Plant</code></td>
+</tr>
+<tr>
+<td><code>barcode</code></td>
+<td>Barcode marker used</td>
+<td><code>ITS</code></td>
+</tr>
+<tr>
+<td><code>taxa</code></td>
+<td>Target taxa for classification</td>
+<td><code>plants</code></td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>Mapping of prediction categories</td>
+<td><code>{"1": "plants", "0": "contaminations"}</code></td>
+</tr>
+<tr>
+<td><code>model_path</code></td>
+<td>Path to the model files</td>
+<td><code>models/ITS_Plant</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="preprocessing-parameters">Preprocessing Parameters<a class="headerlink" href="#preprocessing-parameters" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_length</code></td>
+<td>Maximum sequence length</td>
+<td><code>150</code></td>
+</tr>
+<tr>
+<td><code>truncation</code></td>
+<td>Whether to truncate sequences</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>padding</code></td>
+<td>Padding strategy</td>
+<td><code>max_length</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="training-parameters">Training Parameters<a class="headerlink" href="#training-parameters" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_size</code></td>
+<td>Batch size</td>
+<td><code>32</code></td>
+</tr>
+<tr>
+<td><code>learning_rate</code></td>
+<td>Learning rate</td>
+<td><code>2e-5</code></td>
+</tr>
+<tr>
+<td><code>epochs</code></td>
+<td>Number of epochs</td>
+<td><code>5</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="system-configuration">System Configuration<a class="headerlink" href="#system-configuration" title="Permanent link">&para;</a></h2>
+<p>The system configuration is handled separately and is not part of the model configuration JSON. It should be configured through environment variables or command line arguments.</p>
+<h2 id="complete-configuration-example">Complete Configuration Example<a class="headerlink" href="#complete-configuration-example" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;model_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITS_Plant&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;barcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITS&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;taxa&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plants&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plants&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;contaminations&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;model_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;models/ITS_Plant&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;preprocessing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;max_length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;truncation&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;padding&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;max_length&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;training&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;batch_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;learning_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2e-5</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;epochs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Organisation des Fichiers</strong></li>
+<li>Separate configurations by analysis type</li>
+<li>Maintain a reference configuration</li>
+<li>
+<p>Document major changes</p>
+</li>
+<li>
+<p><strong>Version Management</strong></p>
+</li>
+<li>Version the configuration files</li>
+<li>Maintain a history of changes</li>
+<li>
+<p>Test each new configuration</p>
+</li>
+<li>
+<p><strong>Performance Optimization</strong></p>
+</li>
+<li>Adjust <code>batch_size</code> based on GPU memory</li>
+<li>Adjust <code>num_workers</code> based on the number of cores</li>
+<li>Adjust <code>max_length</code> based on input data</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Insufficient Memory</strong></li>
+<li>Reduce <code>batch_size</code></li>
+<li>Disable GPU usage through environment variables</li>
+<li>
+<p>Increase <code>num_workers</code></p>
+</li>
+<li>
+<p><strong>Slow Performance</strong></p>
+</li>
+<li>Increase <code>num_workers</code></li>
+<li>Optimize <code>max_length</code></li>
+<li>
+<p>Check GPU configuration</p>
+</li>
+<li>
+<p><strong>Format Issues</strong></p>
+</li>
+<li>Validate sequence input</li>
+<li>Check maximum length</li>
+<li>Verify category mapping in <code>categories</code> field</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../usage/quick-start/" class="btn btn-neutral float-left" title="Quick Start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../api/models/" class="btn btn-neutral float-right" title="Models">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../usage/quick-start/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../api/models/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
