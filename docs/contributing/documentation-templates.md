@@ -1,60 +1,58 @@
 # Docstrings
 
-Ce fichier contient des templates pour les différents types de docstrings à utiliser dans DECAF.
-Ces exemples servent de référence pour maintenir une documentation cohérente.
+This file contains templates for different types of docstrings to be used in DECAF.
+These examples serve as a reference to maintain consistent documentation.
 
 
-## Template pour un module
+## Template for a module
 ```python
 """
-Module pour le traitement des séquences ITS.
+Module for ITS sequence processing.
 
-Ce module fournit des fonctions pour nettoyer, normaliser et préparer
-des séquences ITS pour l'analyse et la classification.
+This module provides functions for cleaning, normalizing and preparing
+ITS sequences for analysis and classification.
 
 Functions
 ---------
 clean_sequence
-    Nettoie une séquence en supprimant les caractères non-nucléotidiques.
+    Clean a sequence by removing non-nucleotide characters.
 normalize_sequence
-    Normalise une séquence pour l'entraînement du modèle.
+    Normalize a sequence for model training.
 extract_features
-    Extrait des caractéristiques à partir d'une séquence.
+    Extract features from a sequence.
 """
 ```
 
 
-## Template pour une classe
+## Template for a class
 
 ```python
 class SequenceProcessor:
     """
-    Classe pour le traitement des séquences biologiques.
+    Class for biological sequence processing.
     
-    Cette classe implémente diverses méthodes pour nettoyer, normaliser
-    et extraire des informations des séquences biologiques, en particulier
-    des séquences ITS de plantes.
+    This class implements various methods for cleaning, normalizing and extracting
+    information from biological sequences, particularly ITS sequences from plants.
     
     Parameters
     ----------
     min_length : int, default=100
-        Longueur minimale des séquences à traiter
+        Minimum length of sequences to process
     max_length : int, default=1000
-        Longueur maximale des séquences à traiter
+        Maximum length of sequences to process
     quality_threshold : float, default=0.9
-        Seuil de qualité minimum pour les séquences
+        Minimum quality threshold for sequences
         
     Attributes
     ----------
     processed_sequences : list
-        Liste des séquences traitées
+        List of processed sequences
     stats : dict
-        Statistiques sur les séquences traitées
+        Statistics on processed sequences
         
     Notes
     -----
-    Cette classe est thread-safe et peut être utilisée dans un
-    contexte multiprocessing.
+    This class is thread-safe and can be used in a multiprocessing context.
     """
     
 
@@ -67,22 +65,22 @@ class SequenceProcessor:
 
     def process_batch(self, sequences: List[str]) -> List[Dict[str, Union[str, float]]]:
         """
-        Traite un lot de séquences.
+        Process a batch of sequences.
         
         Parameters
         ----------
         sequences : list of str
-            Liste des séquences à traiter
+            List of sequences to process
             
         Returns
         -------
         list of dict
-            Liste des séquences traitées avec leurs métadonnées
+            List of processed sequences with their metadata
             
         Raises
         ------
         ValueError
-            Si une séquence contient des caractères non valides
+            If a sequence contains invalid characters
         
         Examples
         --------
@@ -94,27 +92,27 @@ class SequenceProcessor:
         pass
 ```
 
-## Template pour une fonction
+## Template for a function
 
 ```python
 def calculate_gc_content(sequence: str) -> float:
     """
-    Calcule le contenu en GC d'une séquence.
+    Calculate the GC content of a sequence.
     
     Parameters
     ----------
     sequence : str
-        Séquence d'ADN
+        DNA sequence
         
     Returns
     -------
     float
-        Proportion de G et C dans la séquence (entre 0 et 1)
+        Proportion of G and C in the sequence (between 0 and 1)
         
     Raises
     ------
     ValueError
-        Si la séquence contient des caractères non-ATGC
+        If the sequence contains invalid characters
         
     Examples
     --------
@@ -126,23 +124,23 @@ def calculate_gc_content(sequence: str) -> float:
     pass
 ```
 
-## Template pour une exception personnalisée
+## Template for a custom exception
 
 ```python
 class SequenceQualityError(Exception):
     """
-    Exception levée lorsqu'une séquence ne répond pas aux critères de qualité.
+    Exception raised when a sequence does not meet quality criteria.
     
     Parameters
     ----------
     sequence_id : str
-        Identifiant de la séquence problématique
+        ID of the problematic sequence
     issue : str
-        Description du problème de qualité
+        Description of the quality issue
     """
     
     def __init__(self, sequence_id: str, issue: str) -> None:
         self.sequence_id = sequence_id
         self.issue = issue
-        super().__init__(f"Problème de qualité pour la séquence {sequence_id}: {issue}")
+        super().__init__(f"Quality issue for sequence {sequence_id}: {issue}")
 ```

@@ -1,32 +1,32 @@
 ---
 name: Bug report
-about: Créer un rapport pour nous aider à améliorer
+about: Create a report to help us improve
 title: '[BUG] '
 labels: bug
 assignees: ''
 
 ---
 
-**Description du bug**
-Une description claire et concise du problème.
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-**Pour reproduire**
-Étapes pour reproduire le comportement:
-1. Aller à '...'
-2. Cliquer sur '....'
-3. Faire défiler jusqu'à '....'
-4. Voir l'erreur
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-**Comportement attendu**
-Une description claire et concise de ce que vous attendiez.
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-**Captures d'écran**
-Si applicable, ajoutez des captures d'écran pour expliquer votre problème.
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-**Environnement (veuillez compléter les informations suivantes):**
+**Environment (please complete the following information):**
  - OS: [ex. Ubuntu 20.04]
- - Version de Python: [ex. 3.9.7]
- - Version de DECAF: [ex. 0.1.0]
+ - Version of Python: [ex. 3.9.7]
+ - Version of DECAF: [ex. 0.1.0]
 
-**Contexte supplémentaire**
-Ajoutez tout autre contexte concernant le problème ici.
+**Additional context**
+Add any other context about the problem here.

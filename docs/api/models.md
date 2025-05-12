@@ -1,13 +1,13 @@
-# Modèles DECAF
+# DECAF Models
 
-## Vue d'Ensemble
+## Overview
 
-DECAF utilise des modèles d'apprentissage profond optimisés pour l'analyse d'ADN. Les principaux modèles disponibles sont :
+DECAF uses deep learning models optimized for DNA analysis. The main models available are :
 
-- `its_plant`: Modèle spécialisé pour la classification d'ITS chez les plantes
-- D'autres modèles seront ajoutés en fonction des besoins
+- `its_plant`: Model specialized for ITS classification in plants
+- Other models will be added as needed
 
-## Architecture des Modèles
+## Models Architecture
 
 ```python
 class DNAClassificationModel(nn.Module):
@@ -18,16 +18,16 @@ class DNAClassificationModel(nn.Module):
         self.dropout = nn.Dropout(config.dropout_rate)
 
     def forward(self, input_ids, attention_mask):
-        # Encodage des séquences
+        # Sequence encoding
         embeddings = self.encoder(input_ids, attention_mask)
         # Classification
         logits = self.classifier(self.dropout(embeddings))
         return logits
 ```
 
-## Configuration des Modèles
+## Models Configuration
 
-Les modèles peuvent être configurés via un fichier YAML :
+Models can be configured via a YAML file :
 
 ```yaml
 model:
@@ -39,15 +39,15 @@ model:
   learning_rate: 5e-5
 ```
 
-## Utilisation des Modèles
+## Models Usage
 
 ```python
 from decaf.models import load_model
 
-# Charger un modèle
+# Load a model
 model = load_model("its_plant")
 
-# Prédiction sur une séquence
+# Prediction on a sequence
 sequence = "ATCG..."
 result = model.predict(sequence)
 ```
