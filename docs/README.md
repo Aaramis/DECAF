@@ -1,33 +1,33 @@
 # Documentation DECAF
 
-Cette documentation fournit une vue d'ensemble complète du projet DECAF (Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences).
+This documentation provides a complete overview of the DECAF project (Decontamination and Classification of Amplicon Fragments).
 
-## Structure de la Documentation
+## Documentation Structure
 
 - [Introduction](introduction.md)
 - [Installation](installation.md)
 - [Utilisation](usage.md)
 - [Configuration](configuration.md)
 - [API Reference](api/index.md)
-- [Contribuer](contributing.md)
+- [Contributing](contributing.md)
 - [FAQ](faq.md)
 - [Changelog](changelog.md)
 
-## Générer la Documentation
+## Generate Documentation
 
-Pour générer la documentation localement :
+To generate the documentation locally :
 
 ```bash
 mkdocs serve
 ```
 
-La documentation sera accessible à l'adresse : http://127.0.0.1:8000
+The documentation will be accessible at : http://127.0.0.1:8000
 
-## Contribuer à la Documentation
+## Contributing to the Documentation
 
-Les contributions à la documentation sont les bienvenues ! Pour contribuer :
+Contributions to the documentation are welcome! To contribute :
 
-1. Clonez le dépôt
-2. Modifiez les fichiers Markdown dans le dossier `docs`
-3. Testez les changements avec `mkdocs serve`
-4. Créez une pull request
+1. Clone the repository
+2. Modify the Markdown files in the `docs` directory
+3. Test the changes with `mkdocs serve`
+4. Create a pull request

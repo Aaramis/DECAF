@@ -1,60 +1,60 @@
-# Standards de codage pour DECAF
+# DECAF Coding Standards
 
-Ce document définit les normes de codage à suivre pour le projet DECAF.
+This document defines the coding standards to be followed for the DECAF project.
 
-## Style de code général
+## General Code Style
 
-- Suivre la norme [PEP 8](https://www.python.org/dev/peps/pep-0008/) pour le style de code Python.
-- Utiliser [Black](https://black.readthedocs.io/) avec les paramètres par défaut pour le formatage automatique du code.
-- Utiliser [isort](https://pycqa.github.io/isort/) pour organiser les imports.
-- Utiliser [flake8](https://flake8.pycqa.org/) pour la vérification statique du code.
+- Follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) Python code style.
+- Use [Black](https://black.readthedocs.io/) with default parameters for automatic code formatting.
+- Use [isort](https://pycqa.github.io/isort/) to organize imports.
+- Use [flake8](https://flake8.pycqa.org/) for static code analysis.
 
-## Structure des fichiers
+## File Structure
 
-- Chaque module doit avoir un fichier `__init__.py`.
-- Les fichiers de test doivent être nommés `test_*.py` et placés dans le répertoire `tests/`.
-- Les scripts exécutables doivent être placés dans le répertoire `decaf/`.
+- Each module must have an `__init__.py` file.
+- Test files must be named `test_*.py` and placed in the `tests/` directory.
+- Executable scripts must be placed in the `decaf/` directory.
 
-## Longueur des lignes et indentation
+## Line Length and Indentation
 
-- Limite de 88 caractères par ligne (norme Black).
-- Utiliser 4 espaces pour l'indentation (pas de tabulations).
-- Les commentaires de ligne doivent être limités à 72 caractères.
+- Limit of 88 characters per line (Black norm).
+- Use 4 spaces for indentation (no tabs).
+- Line comments must be limited to 72 characters.
 
-## Nommage
+## Naming
 
-- Classes: Utiliser le format CamelCase (`class ModelTrainer:`).
-- Fonctions et variables: Utiliser le format snake_case (`def process_sequence():`, `sequence_data = ...`).
-- Constantes: Utiliser des majuscules avec underscore (`MAX_SEQUENCE_LENGTH = 1000`).
-- Modules: Utiliser des noms courts, tout en minuscules (`utils.py`, `preprocessing.py`).
-- Éviter les noms de variables d'une seule lettre, sauf pour les compteurs ou les itérateurs.
+- Classes: Use the CamelCase format (`class ModelTrainer:`).
+- Functions and variables: Use the snake_case format (`def process_sequence():`, `sequence_data = ...`).
+- Constants: Use uppercase with underscores (`MAX_SEQUENCE_LENGTH = 1000`).
+- Modules: Use short names in lowercase (`utils.py`, `preprocessing.py`).
+- Avoid single-letter variable names, except for counters or iterators.
 
 ## Docstrings
 
-- Toutes les fonctions, classes et méthodes publiques doivent avoir des docstrings.
-- Utiliser le format [NumPy/SciPy](https://numpydoc.readthedocs.io/en/latest/format.html) pour les docstrings.
-- Exemple de docstring pour une fonction:
+- All public functions, classes, and methods must have docstrings.
+- Use the [NumPy/SciPy](https://numpydoc.readthedocs.io/en/latest/format.html) format for docstrings.
+- Example docstring for a function:
 
 ```python
 from typing import Tuple
 
 def align_sequences(seq1: str, seq2: str, method: str = 'global') -> Tuple[str, str, float]:
     """
-    Aligne deux séquences biologiques.
+    Align two biological sequences.
     
     Parameters
     ----------
     seq1 : str
-        Première séquence à aligner
+        First sequence to align
     seq2 : str
-        Deuxième séquence à aligner
+        Second sequence to align
     method : {'global', 'local', 'semi-global'}, default='global'
-        Méthode d'alignement à utiliser
+        Alignment method to use
         
     Returns
     -------
     tuple
-        Un tuple contenant les séquences alignées (str, str) et le score (float)
+        A tuple containing the aligned sequences (str, str) and the score (float)
         
     Examples
     --------
@@ -64,31 +64,32 @@ def align_sequences(seq1: str, seq2: str, method: str = 'global') -> Tuple[str, 
 
 ```
 
-## Commentaires
+## Comments
 
-- Les commentaires doivent expliquer le "pourquoi", pas le "comment".
-- Pour les sections complexes, ajouter des commentaires expliquant la logique.
-- Les commentaires TODO doivent inclure un identifiant de la personne responsable:
+- Comments should explain the "why", not the "how".
+- For complex sections, add comments explaining the logic.
+- TODO comments should include the responsible person's identifier:
   ```python
-  # TODO(@username): Implémenter la fonction de normalisation
+  # TODO(@username): Implement the normalization function
   ```
 
-## Gestion des erreurs
+## Error Handling
 
-- Utiliser des exceptions spécifiques, pas des exceptions génériques.
-- Définir des exceptions personnalisées dans un module `exceptions.py`.
-- Les messages d'erreur doivent être informatifs et suggérer des solutions.
+- Use specific exceptions, not generic exceptions.
+- Define custom exceptions in an `exceptions.py` module.
+- Error messages should be informative and suggest solutions.
 
-## Tests unitaires
+## Unit Tests
 
-- Chaque fonction doit avoir au moins un test associé.
-- Utiliser pytest comme framework de test.
-- Les tests doivent être indépendants les uns des autres.
-- Les tests doivent vérifier les cas normaux et les cas limites.
+- Each function must have at least one associated test.
+- Use pytest as the test framework.
+- Tests must be independent of each other.
+- Tests must verify normal and edge cases.
 
-## Validation du code
+## Code Validation
 
-Avant chaque commit, assurez-vous que:
-1. Tous les tests passent (`pytest`)
-2. Le code est correctement formaté (`black .` et `isort .`)
-3. Aucun avertissement n'est signalé par flake8 (`flake8`)
+Before each commit, make sure that:
+1. All tests pass (`pytest`)
+2. The code is correctly formatted (`black .` and `isort .`)
+3. No warnings are reported by flake8 (`flake8`)
+4. Type checking passes (`mypy decaf/`)

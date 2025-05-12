@@ -1,4 +1,4 @@
-# Démarrage Rapide
+# Quick Start
 
 ## Installation
 
@@ -6,31 +6,35 @@
 pip install decaf
 ```
 
-## Analyse de Base
+## Basic Analysis
 
-Pour analyser vos séquences d'ADN :
+To analyze your DNA sequences:
 
 ```bash
-decaf analyze --input data/sequences.fasta --output results/ --model its_plant
+decaf --input_fastq data/test.fasta --output_folder output/ --taxa plants --barcode ITS --cpus 4
 ```
 
-### Options de Base
+### Basic Options
 
-| Option | Description | Exemple |
+| Option | Description | Example |
 |--------|-------------|---------|
-| `--input` | Fichier d'entrée (FASTA/FASTQ) | `--input sequences.fasta` |
-| `--output` | Dossier de sortie | `--output results/` |
-| `--model` | Modèle à utiliser | `--model its_plant` |
-| `--batch-size` | Taille des lots | `--batch-size 32` |
-| `--gpu` | Utiliser le GPU (0/1) | `--gpu 1` |
+| `--input_fastq` | Input file (FASTA/FASTQ) | `--input_fastq sequences.fasta` |
+| `--output_folder` | Output directory | `--output_folder results/` |
+| `--taxa` | Taxonomic group | `--taxa plants` |
+| `--barcode` | Barcode | `--barcode ITS` |
+| `--batch-size` | Batch size | `--batch-size 32` |
+| `--gpus` | Use GPU (0/1) | `--gpus 0` |
+| `--cpus` | Number of CPU | `--cpus 1` |
 
-## Exemple Complet
+## Complete Example
 
 ```bash
-decaf analyze \
-  --input data/sequences.fasta \
-  --output results/ \
-  --model its_plant \
-  --batch-size 64 \
-  --gpu 1
+decaf \
+  --input_fastq data/test.fasta \
+  --output_folder output/ \
+  --taxa plants \
+  --barcode ITS \
+  --batch_size 64 \
+  --gpus 0 \
+  --cpus 1
 ```

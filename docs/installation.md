@@ -1,37 +1,37 @@
-# Installation de DECAF
+# Installation of DECAF
 
 ## Installation via PyPI
 
-La manière la plus simple d'installer DECAF est via PyPI :
+The simplest way to install DECAF is via PyPI :
 
 ```bash
 pip install decaf
 ```
 
-## Installation depuis le Code Source
+## Installation from Source
 
-### Prérequis
+### Prerequisites
 
-Avant d'installer DECAF, assurez-vous d'avoir les dépendances suivantes :
+Before installing DECAF, make sure you have the following dependencies :
 
-- Python 3.8 ou supérieur
+- Python 3.8 or higher
 - Git
-- Une carte graphique NVIDIA (recommandé pour le traitement rapide)
-- pip (gestionnaire de paquets Python)
+- A NVIDIA graphics card (recommended for fast processing)
+- pip (Python package manager)
 
-### Étapes d'Installation
+### Installation Steps
 
-1. **Cloner le Dépôt**
+1. **Clone the Repository**
 ```bash
 git clone https://github.com/Aaramis/DECAF.git
 cd DECAF
 ```
 
-2. **Créer un Environnement Virtuel**
+2. **Create a Virtual Environment**
 
-Il est fortement recommandé d'utiliser un environnement virtuel pour gérer les dépendances.
+It is strongly recommended to use a virtual environment to manage dependencies.
 
-Sur Linux/Mac :
+On Linux/Mac :
 ```bash
 python -m venv decaf-env
 source decaf-env/bin/activate
@@ -43,85 +43,85 @@ python -m venv decaf-env
 decaf-env\Scripts\activate
 ```
 
-3. **Installer les Dépendances**
+3. **Install Dependencies**
 
-Installez les dépendances nécessaires :
+Install the required dependencies :
 ```bash
 pip install -r requirements.txt
 ```
 
-Pour les développeurs, installez également les dépendances de développement :
+For developers, install the development dependencies :
 ```bash
 pip install -r requirements-dev.txt
 ```
 
-4. **Installer DECAF en Mode Développement**
+4. **Install DECAF in Development Mode**
 ```bash
 pip install -e .
 ```
 
-## Vérification de l'Installation
+## Verification of Installation
 
-Pour vérifier que DECAF est correctement installé, exécutez :
+To verify that DECAF is correctly installed, run :
 ```bash
 decaf --version
 ```
 
-## Configuration de l'Environnement
+## Environment Configuration
 
-### Variables d'Environnement
+### Environment Variables
 
-DECAF utilise les variables d'environnement suivantes :
+DECAF uses the following environment variables :
 
-- `DECAF_CONFIG_PATH` : Chemin vers le fichier de configuration
-- `DECAF_LOG_LEVEL` : Niveau de log (DEBUG, INFO, WARNING, ERROR)
-- `DECAF_GPU` : Utiliser le GPU (0 pour désactiver)
+- `DECAF_CONFIG_PATH` : Path to the configuration file
+- `DECAF_LOG_LEVEL` : Log level (DEBUG, INFO, WARNING, ERROR)
+- `DECAF_GPU` : Use GPU (0 to disable)
 
-### Configuration du Log
+### Log Configuration
 
-La configuration du log peut être personnalisée dans le fichier `config/logging.yaml`.
+The log configuration can be customized in the `config/logging.yaml` file.
 
-## Dépannage
+## Troubleshooting
 
-### Problèmes Communs
+### Common Issues
 
-1. **Erreur de Version Python**
-   - Assurez-vous d'utiliser Python 3.8 ou supérieur
-   - Vérifiez la version avec : `python --version`
+1. **Python Version Error**
+   - Ensure you are using Python 3.8 or higher
+   - Check the version with : `python --version`
 
-2. **Problèmes de Permissions**
-   - Utilisez un environnement virtuel
-   - Exécutez les commandes avec les droits appropriés
+2. **Permission Issues**
+   - Use a virtual environment
+   - Run commands with appropriate permissions
 
-3. **Dépendances Manquantes**
-   - Vérifiez que toutes les dépendances sont installées
-   - Réinstallez les dépendances si nécessaire
+3. **Missing Dependencies**
+   - Verify that all dependencies are installed
+   - Reinstall dependencies if necessary
 
-## Mise à Jour
+## Update
 
-Pour mettre à jour DECAF :
+To update DECAF :
 
 ```bash
 pip install --upgrade decaf
 ```
 
-Ou depuis le code source :
+Or from the source code :
 ```bash
 git pull
 pip install --upgrade -e .
 ```
 
-## Suppression
+## Uninstall
 
-Pour désinstaller DECAF :
+To uninstall DECAF :
 ```bash
 pip uninstall decaf
 ```
 
 ## Support
 
-Pour toute question ou problème, veuillez :
+For any questions or issues, please :
 
-1. Ouvrir une issue sur GitHub
-2. Consulter la FAQ
-3. Contacter l'équipe de développement
+1. Open an issue on GitHub
+2. Consult the FAQ
+3. Contact the development team

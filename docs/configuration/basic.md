@@ -1,136 +1,125 @@
-# Configuration de Base
+# Basic Configuration
 
-## Structure des Fichiers de Configuration
+## Configuration File Structure
 
-Les fichiers de configuration de DECAF utilisent le format YAML. Voici la structure de base :
+DECAF configuration files use the JSON format. Here is the basic structure :
 
-```yaml
-# Configuration du modèle
-model:
-  name: its_plant
-  hidden_size: 768
-  num_labels: 2
-  dropout_rate: 0.1
-
-# Paramètres d'entraînement
-training:
-  batch_size: 32
-  learning_rate: 5e-5
-  epochs: 10
-  patience: 3
-
-# Paramètres de données
-data:
-  max_length: 150
-  num_workers: 4
-  input_format: fasta
-
-# Paramètres système
-system:
-  use_gpu: true
-  num_gpus: 1
-  num_nodes: 1
-  seed: 42
+```json
+[
+    {
+        "model_name": "ITS_Plant",
+        "barcode": "ITS",
+        "taxa": "plants",
+        "categories": {
+            "1": "plants",
+            "0": "contaminations"
+        },
+        "model_path": "models/ITS_Plant",
+        "preprocessing": {
+            "max_length": 150,
+            "truncation": true,
+            "padding": "max_length"
+        },
+        "training": {
+            "batch_size": 32,
+            "learning_rate": 2e-5,
+            "epochs": 5
+        }
+    }
+]
 ```
 
-## Paramètres du Modèle
+## Configuration Fields
 
-| Paramètre | Description | Valeur par défaut |
-|-----------|-------------|-------------------|
-| `name` | Nom du modèle | `its_plant` |
-| `hidden_size` | Taille des vecteurs cachés | `768` |
-| `num_labels` | Nombre de classes | `2` |
-| `dropout_rate` | Taux de dropout | `0.1` |
+### Model Configuration
 
-## Paramètres d'Entraînement
+| Field | Description | Example Value |
+|-------|-------------|---------------|
+| `model_name` | Name of the model | `ITS_Plant` |
+| `barcode` | Barcode marker used | `ITS` |
+| `taxa` | Target taxa for classification | `plants` |
+| `categories` | Mapping of prediction categories | `{"1": "plants", "0": "contaminations"}` |
+| `model_path` | Path to the model files | `models/ITS_Plant` |
 
-| Paramètre | Description | Valeur par défaut |
-|-----------|-------------|-------------------|
-| `batch_size` | Taille des lots | `32` |
-| `learning_rate` | Taux d'apprentissage | `5e-5` |
-| `epochs` | Nombre d'époques | `10` |
-| `patience` | Patience pour early stopping | `3` |
+### Preprocessing Parameters
 
-## Paramètres de Données
+| Field | Description | Default Value |
+|-------|-------------|---------------|
+| `max_length` | Maximum sequence length | `150` |
+| `truncation` | Whether to truncate sequences | `true` |
+| `padding` | Padding strategy | `max_length` |
 
-| Paramètre | Description | Valeur par défaut |
-|-----------|-------------|-------------------|
-| `max_length` | Longueur maximale des séquences | `150` |
-| `num_workers` | Nombre de workers pour le chargement | `4` |
-| `input_format` | Format des données d'entrée | `fasta` |
+### Training Parameters
 
-## Paramètres Système
+| Field | Description | Default Value |
+|-------|-------------|---------------|
+| `batch_size` | Batch size | `32` |
+| `learning_rate` | Learning rate | `2e-5` |
+| `epochs` | Number of epochs | `5` |
 
-| Paramètre | Description | Valeur par défaut |
-|-----------|-------------|-------------------|
-| `use_gpu` | Utiliser le GPU | `true` |
-| `num_gpus` | Nombre de GPUs | `1` |
-| `num_nodes` | Nombre de nœuds | `1` |
-| `seed` | Seed pour la reproductibilité | `42` |
+## System Configuration
 
-## Exemple de Configuration Complète
+The system configuration is handled separately and is not part of the model configuration JSON. It should be configured through environment variables or command line arguments.
 
-```yaml
-model:
-  name: its_plant
-  hidden_size: 768
-  num_labels: 2
-  dropout_rate: 0.1
+## Complete Configuration Example
 
-training:
-  batch_size: 64
-  learning_rate: 5e-5
-  epochs: 20
-  patience: 5
-
-
-
-
-
-data:
-  max_length: 200
-  num_workers: 8
-  input_format: fasta
-
-system:
-  use_gpu: true
-  num_gpus: 2
-  num_nodes: 1
-  seed: 42
+```json
+[
+    {
+        "model_name": "ITS_Plant",
+        "barcode": "ITS",
+        "taxa": "plants",
+        "categories": {
+            "1": "plants",
+            "0": "contaminations"
+        },
+        "model_path": "models/ITS_Plant",
+        "preprocessing": {
+            "max_length": 200,
+            "truncation": true,
+            "padding": "max_length"
+        },
+        "training": {
+            "batch_size": 64,
+            "learning_rate": 2e-5,
+            "epochs": 10
+        }
+    }
+]
 ```
 
-## Bonnes Pratiques
+## Best Practices
 
 1. **Organisation des Fichiers**
-   - Séparer les configurations par type d'analyse
-   - Maintenir une configuration de référence
-   - Documenter les changements majeurs
+   - Separate configurations by analysis type
+   - Maintain a reference configuration
+   - Document major changes
 
-2. **Gestion des Versions**
-   - Versionner les fichiers de configuration
-   - Maintenir un historique des modifications
-   - Tester chaque nouvelle configuration
+2. **Version Management**
+   - Version the configuration files
+   - Maintain a history of changes
+   - Test each new configuration
 
-3. **Optimisation des Performances**
-   - Adapter `batch_size` selon la mémoire GPU
-   - Optimiser `num_workers` selon le nombre de cœurs
-   - Ajuster `max_length` selon les données d'entrée
+3. **Performance Optimization**
+   - Adjust `batch_size` based on GPU memory
+   - Adjust `num_workers` based on the number of cores
+   - Adjust `max_length` based on input data
 
-## Dépannage
+## Troubleshooting
 
-### Problèmes Communs
+### Common Issues
 
-1. **Mémoire Insuffisante**
-   - Réduire `batch_size`
-   - Désactiver `use_gpu`
-   - Augmenter `num_workers`
+1. **Insufficient Memory**
+   - Reduce `batch_size`
+   - Disable GPU usage through environment variables
+   - Increase `num_workers`
 
-2. **Performance Lente**
-   - Augmenter `num_workers`
-   - Optimiser `max_length`
-   - Vérifier la configuration GPU
+2. **Slow Performance**
+   - Increase `num_workers`
+   - Optimize `max_length`
+   - Check GPU configuration
 
-3. **Problèmes de Format**
-   - Vérifier `input_format`
-   - Valider les séquences d'entrée
-   - Vérifier la longueur maximale
+3. **Format Issues**
+   - Validate sequence input
+   - Check maximum length
+   - Verify category mapping in `categories` field

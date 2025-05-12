@@ -1,93 +1,92 @@
-# Introduction à DECAF
+# Introduction to DECAF
 
-DECAF (Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences) est un framework bioinformatique moderne conçu pour l'analyse et la décontamination de séquences d'ADN environnementales. Il utilise des modèles d'apprentissage profond pour améliorer la fiabilité des analyses génomiques environnementales.
+DECAF (DEcontamination and Classification of Amplicon Fragment) is a bioinformatics framework designed for the analysis and decontamination of environmental DNA sequences. It uses deep learning models to enhance the reliability of genomic analyses.
 
-## Objectifs
+## Objectives
 
-- **Classification de séquences d'ADN**
-  - Identification précise des séquences ITS
-  - Classification taxonomique des séquences
-  - Support des formats FASTQ et FASTA
+- **Sequence Classification**
+  - ITS sequence identification
+  - Support for FASTQ and FASTA formats
 
-- **Gestion des Contaminants**
-  - Détection des séquences non-cibles
-  - Filtrage automatique des contaminants
-  - Génération de rapports d'analyse
+- **Contaminant Management**
+  - Detection of non-target sequences
+  - Automatic contaminant filtering
+  - Generation of analysis reports
 
-- **Performance et Scalabilité**
-  - Optimisation pour le traitement par lots
-  - Support GPU via PyTorch
-  - Architecture modulaire extensible
+- **Performance and Scalability**
+  - Optimized for batch processing
+  - GPU support via PyTorch
+  - Modular extensible architecture
 
 ## Architecture
 
-DECAF est construit autour de plusieurs composants clés :
+DECAF is built around several key components :
 
 ```
 DECAF/
-├── models/           # Implémentation des modèles de deep learning
-├── data/            # Gestion des données et prétraitement
-├── utils/           # Fonctions utilitaires
-├── tests/           # Tests unitaires et d'intégration
+├── models/           # Implementation of deep learning models
+├── data/            # Data management and preprocessing
+├── utils/           # Utility functions
+├── tests/           # Unit and integration tests
 └── docs/           # Documentation
 ```
 
-## Technologies Utilisées
+## Technologies Used
 
-- **Framework Deep Learning**
+- **Deep Learning Framework**
   - PyTorch
   - PyTorch Lightning
   - Transformers
 
-- **Gestion des Données**
+- **Data Management**
   - Polars
   - Pandas
   - Biopython
 
-- **Tests et Qualité**
+- **Tests and Quality**
   - pytest
   - pytest-cov
   - black
   - flake8
 
-## Cas d'Utilisation
+## Use Cases
 
-DECAF est particulièrement utile pour :
+DECAF is particularly useful for :
 
-1. **Recherche Environnementale**
-   - Analyse de séquences d'ADN environnementales
-   - Études de biodiversité
-   - Surveillance écologique
+1. **Environmental Research**
+   - Analysis of environmental DNA sequences
+   - Biodiversity studies
+   - Ecological monitoring
 
-2. **Bioinformatique**
-   - Traitement de grands ensembles de données
-   - Classification taxonomique
-   - Décontamination de séquences
+2. **Bioinformatics**
+   - Processing of large datasets
+   - Taxonomic classification
+   - Sequence decontamination
 
-3. **Recherche Académique**
-   - Validation de résultats expérimentaux
-   - Analyse comparative
-   - Études phylogénétiques
+3. **Academic Research**
+   - Validation of experimental results
+   - Comparative analysis
+   - Phylogenetic studies
 
-## Avantages
+## Advantages
 
-- **Précision**
-  - Modèles d'apprentissage profond optimisés
-  - Architecture robuste
-  - Validation continue
+- **Precision**
+  - Optimized deep learning models
+  - Robust architecture
+  - Continuous validation
 
-- **Flexibilité**
-  - Support de multiples formats
-  - Extensibilité
-  - Personnalisation
+- **Flexibility**
+  - Support of multiple formats
+  - Extensibility
+  - Customization
 
 - **Performance**
-  - Optimisation GPU
-  - Traitement par lots
-  - Mémoire optimisée
+  - GPU support via PyTorch
+  - Batch processing
+  - Memory optimization
 
-## Prochaines Étapes
+## Next Steps
 
-Pour commencer à utiliser DECAF, consultez la section [Installation](installation.md).
+To get started with DECAF, see the [Installation](installation.md) section.
 
-Pour plus d'informations sur les fonctionnalités spécifiques, consultez la [Documentation API](api/index.md).
+For more information on specific features, see the [API Documentation](api/index.md).

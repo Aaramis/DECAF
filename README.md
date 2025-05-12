@@ -1,4 +1,4 @@
-![DECAF](https://raw.githubusercontent.com/Aaramis/DECAF/main/docs/source/images/decaf_logo.png)
+<!-- ![DECAF](docs/source/images/decaf_logo.png) -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
@@ -6,143 +6,143 @@
 [![Documentation Status](https://readthedocs.org/projects/decaf/badge/?version=latest)](https://decaf.readthedocs.io/en/latest/?badge=latest)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# DECAF: Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences
+# DECAF: Decontamination and Classification of Amplicon Fragments
 
-DECAF (Deep Learning Framework for Environmental Contaminant Analysis in DNA Sequences) est un framework bioinformatique moderne conçu pour l'analyse et la décontamination de séquences d'ADN environnementales. Il utilise des modèles d'apprentissage profond pour améliorer la fiabilité des analyses génomiques environnementales.
+DECAF (Decontamination and Classification of Amplicon Fragments) is a bioinformatics framework designed for the analysis and decontamination of environmental DNA sequences. It uses deep learning models to enhance the reliability of environmental genomic analyses.
 
 ## 📋 Description
 
-DECAF offre une solution complète pour :
-- La classification de séquences d'ADN ITS (Internal Transcribed Spacer)
-- La détection et la filtration des contaminants
-- L'analyse de séquences environnementales à grande échelle
-- L'intégration dans des pipelines bioinformatiques existants
+DECAF provides a complete solution for:
+- Classification of ITS (Internal Transcribed Spacer) DNA sequences
+- Detection and filtering of contaminants
+- Large-scale environmental sequence analysis
+- Integration into existing bioinformatics pipelines
 
-## 🚀 Caractéristiques Principales
+## 🚀 Main Features
 
-- **Classification Avancée**
-  - Modèles de deep learning optimisés pour l'ADN
-  - Support des formats FASTQ et FASTA
-  - Interface en ligne de commande intuitive
+- **Advanced Classification**
+  - Deep learning models optimized for DNA
+  - Support for FASTQ and FASTA formats
+  - Intuitive command-line interface
 
-- **Gestion des Contaminants**
-  - Détection précise des séquences non-cibles
-  - Filtrage automatique des contaminants
-  - Rapports détaillés d'analyse
+- **Contaminant Management**
+  - Precise detection of non-target sequences
+  - Automatic contaminant filtering
+  - Detailed analysis reports
 
-- **Performance et Scalabilité**
-  - Optimisé pour le traitement par lots
-  - Support GPU via PyTorch
-  - Architecture modulaire extensible
+- **Performance and Scalability**
+  - Optimized for batch processing
+  - GPU support via PyTorch
+  - Extensible modular architecture
 
-- **Documentation Complète**
-  - Guide d'utilisation détaillé
-  - Exemples de cas d'utilisation
+- **Complete Documentation**
+  - Detailed user guide
+  - Use case examples
   - API documentation
 
 ## 📦 Installation
 
-### Prérequis
+### Prerequisites
 
-- Python 3.8 ou supérieur
+- Python 3.8 or higher
 - Git
-- Une carte graphique NVIDIA (recommandé pour le traitement rapide)
+- NVIDIA graphics card (recommended for fast processing)
 
-### Installation via PyPI
+### Installing via PyPI
 
 ```bash
 pip install decaf
 ```
 
-### Installation depuis le code source
+### Installing from source
 
-1. Cloner le dépôt :
+1. Clone the repository:
 ```bash
 git clone https://github.com/Aaramis/DECAF.git
 cd DECAF
 ```
 
-2. Créer un environnement virtuel :
+2. Create a virtual environment:
 ```bash
 python -m venv decaf-env
-source decaf-env/bin/activate  # Sur Linux/Mac
-# decaf-env\Scripts\activate  # Sur Windows
+source decaf-env/bin/activate  # On Linux/Mac
+# decaf-env\Scripts\activate  # On Windows
 ```
 
-3. Installer les dépendances :
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🏃‍♂️ Utilisation Rapide
+## 🏃 Quick Start
 
 ```bash
-decaf analyze --input data/sequences.fasta --output results/ --model its_plant
+decaf --input_fastq data/test.fasta --output_folder output/ --taxa plants --barcode ITS --cpus 4
 ```
 
-Pour plus d'options et d'exemples, consultez la documentation complète.
+For more options and examples, consult the complete documentation.
 
 ## 📚 Documentation
 
-La documentation complète est disponible sur :
+The complete documentation is available at:
 [https://decaf.readthedocs.io](https://decaf.readthedocs.io)
 
-Pour générer la documentation localement :
+To generate the documentation locally:
 
-1. Installer les dépendances de développement :
+1. Install development dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Lancer le serveur de documentation :
+2. Start the documentation server:
 ```bash
 mkdocs serve
 ```
 
-Puis ouvrir votre navigateur à l'adresse : http://127.0.0.1:8000
+Then open your browser at: http://127.0.0.1:8000
 
-## 🤝 Contribuer
+## 🤝 Contributing
 
-Nous accueillons avec plaisir les contributions à DECAF !
+We welcome contributions to DECAF!
 
-1. Ouvrez une issue pour signaler des bugs ou proposer des fonctionnalités
-2. Créez une pull request pour contribuer du code
-3. Suivez les directives de style de code
+1. Open an issue to report bugs or suggest features
+2. Create a pull request to contribute code
+3. Follow the code style guidelines
 
-Pour vérifier le style de votre code :
+To check your code style:
 ```bash
 pip install black
 black --check .
 ```
 
-Pour formater votre code :
+To format your code:
 ```bash
 black .
 ```
 
-## 🏗️ Structure du Projet
+## 🏗️ Project Structure
 
 ```
 DECAF/
-├── decaf/                 # Code source principal
-│   ├── models/           # Implémentation des modèles
-│   ├── data/             # Gestion des données
-│   └── utils/            # Fonctions utilitaires
-├── tests/                # Tests unitaires et d'intégration
+├── decaf/                 # Main code
+│   ├── models/           # Model implementation
+│   ├── data/             # Data management
+│   └── utils/            # Utility functions
+├── tests/                # Unit and integration tests
 ├── docs/                 # Documentation
-├── config/               # Fichiers de configuration
-└── data/                 # Données d'exemple
+├── config/               # Configuration files
+└── data/                 # Example data
 ```
 
-## 📜 Licence
+## 📜 License
 
-DECAF est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+DECAF is under the MIT license. See the [LICENSE](LICENSE) file for more details.
 
-## 🙏 Remerciements
+## 🙏 Acknowledgments
 
-- [Auguste_GARDETTE](https://github.com/Aaramis) - Développeur principal
-- [Contributors](https://github.com/Aaramis/DECAF/graphs/contributors) - Tous les contributeurs
+- [Auguste_GARDETTE](https://github.com/Aaramis) - Lead Developer
+- [Contributors](https://github.com/Aaramis/DECAF/graphs/contributors) - All contributors
 
 ## 📞 Support
 
-Pour toute question ou problème, veuillez ouvrir une issue sur GitHub ou contacter l'équipe de développement.
+For any questions or issues, please open an issue on GitHub or contact the development team.

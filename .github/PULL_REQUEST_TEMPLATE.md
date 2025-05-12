@@ -1,24 +1,24 @@
 ## Description
 
-Décrivez brièvement les modifications apportées.
+Briefly describe the changes made.
 
-## Type de changement
+## Type of change
 
-- [ ] Correction de bug
-- [ ] Nouvelle fonctionnalité
-- [ ] Modification d'une fonctionnalité existante
+- [ ] Correction of bug
+- [ ] New feature
+- [ ] Modification of an existing feature
 - [ ] Documentation
-- [ ] Autre (préciser)
+- [ ] Other (specify)
 
-## Comment cela a-t-il été testé?
+## How was this tested?
 
-Décrivez les tests effectués pour vérifier vos modifications.
+Describe the tests that were performed to verify your modifications.
 
 ## Checklist:
 
-- [ ] J'ai effectué une revue de mon propre code
-- [ ] J'ai commenté mon code, particulièrement dans les zones complexes
-- [ ] J'ai mis à jour la documentation
-- [ ] Mes modifications ne génèrent pas de nouveaux avertissements
-- [ ] J'ai ajouté des tests qui prouvent que ma correction ou ma fonctionnalité fonctionne
-- [ ] Les tests unitaires existants passent avec mes modifications
+- [ ] I have performed a review of my own code
+- [ ] I have commented my code, particularly in complex areas
+- [ ] I have updated the documentation
+- [ ] My modifications do not generate new warnings
+- [ ] I have added tests that prove that my correction or feature works
+- [ ] Existing unit tests pass with my modifications
