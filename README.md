@@ -1,4 +1,4 @@
-<!-- ![DECAF](docs/source/images/decaf_logo.png) -->
+<!-- ![DECAF Logo](docs/source/images/decaf_logo.png) -->
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
@@ -6,39 +6,34 @@
 [![Documentation Status](https://readthedocs.org/projects/decaf/badge/?version=latest)](https://decaf.readthedocs.io/en/latest/?badge=latest)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# DECAF: Decontamination and Classification of Amplicon Fragments
+# ☕ DECAF — *Decontamination and Classification of Amplicon Fragments*
 
-DECAF (Decontamination and Classification of Amplicon Fragments) is a bioinformatics framework designed for the analysis and decontamination of environmental DNA sequences. It uses deep learning models to enhance the reliability of environmental genomic analyses.
+**DECAF** is a bioinformatics framework for detecting and removing contamination in environmental DNA (eDNA) sequences. It leverages deep learning to classify amplicon fragments, enhancing the reliability of metabarcoding analyses.
 
-## 📋 Description
+> Currently supports ITS barcodes for plant contamination detection.  
+> Future versions aim to support multiple barcodes and taxa.
 
-DECAF provides a complete solution for:
-- Classification of ITS (Internal Transcribed Spacer) DNA sequences
-- Detection and filtering of contaminants
-- Large-scale environmental sequence analysis
-- Integration into existing bioinformatics pipelines
+---
 
-## 🚀 Main Features
+## 🧬 Overview
 
-- **Advanced Classification**
-  - Deep learning models optimized for DNA
-  - Support for FASTQ and FASTA formats
-  - Intuitive command-line interface
+DECAF is still under active development. For now, it provides a single deep learning model focused on **ITS barcodes** (ITS1, ITS2). The long-term goal is to offer a suite of models for diverse barcodes (e.g. COI, rbcL, 16S) across various taxonomic levels.
 
-- **Contaminant Management**
-  - Precise detection of non-target sequences
-  - Automatic contaminant filtering
-  - Detailed analysis reports
+It can be:
+- Integrated into existing pipelines like **OBITools**, **AmpliSeq**, or **QIIME**
+- Used standalone for rapid filtering/classification of FASTA/FASTQ data
+- Helpful in building clean reference databases for metabarcoding
 
-- **Performance and Scalability**
-  - Optimized for batch processing
-  - GPU support via PyTorch
-  - Extensible modular architecture
+---
 
-- **Complete Documentation**
-  - Detailed user guide
-  - Use case examples
-  - API documentation
+## 🌱 Current Model: `ITS_Plant`
+
+- **Barcode support**: ITS, ITS1, ITS2  
+- **Input types**: Amplicons, ASVs  
+- **Task**: Binary classification — *plant vs. contaminant*  
+- **Output**: Filtered FASTA, prediction scores
+
+---
 
 ## 📦 Installation
 
@@ -58,7 +53,7 @@ pip install decaf
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Aaramis/DECAF.git
+git clone git@github.com:UMMISCO/decaf.git
 cd DECAF
 ```
 
@@ -74,10 +69,12 @@ source decaf-env/bin/activate  # On Linux/Mac
 pip install -r requirements.txt
 ```
 
+---
+
 ## 🏃 Quick Start
 
 ```bash
-decaf --input_fastq data/test.fasta --output_folder output/ --taxa plants --barcode ITS --cpus 4
+decaf --input_fastq data/test.fasta --output_folder output/ --taxa plants --barcode ITS --cpus 4 --threshold 0.99
 ```
 
 For more options and examples, consult the complete documentation.
